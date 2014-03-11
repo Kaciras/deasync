@@ -21,6 +21,11 @@ var request = deasync(function (url, done) {
   }).on('error', done);
 });
 
+
+setTimeout(function () {
+  console.log('async');
+}, 1000);
+
 console.log(exec('ls -la'));
-sleep(1000);
+sleep(2000);
 console.log(request('http://nodejs.org'));
