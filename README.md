@@ -28,7 +28,7 @@ function SyncFunction(){
 }
 ```
 
-* Generic async wrapper
+* Generic wrapper of async function with standard API signature `function(p1,...pn,function cb(err,res){})`
 
 ```
 var deasync = require('deasync');
@@ -41,7 +41,7 @@ console.log('done');
 ```
 
 ## Installation
-Prerequisites: deasync uses node-gyp to compile C++ source code so you need the compilers listed in in [node-gyp](https://github.com/TooTallNate/node-gyp). 
+Prerequisites: Except on a few platforms where binary distribution is included, deasync uses node-gyp to compile C++ source code so you may need the compilers listed in [node-gyp](https://github.com/TooTallNate/node-gyp). 
 
 To install, run 
 ```npm install deasync```
