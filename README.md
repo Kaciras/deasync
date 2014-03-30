@@ -23,7 +23,7 @@ function SyncFunction(){
   while(ret === undefined) {
     require('deasync').sleep(100);
   }
-  // returns hello with sleep; undefined otherwise
+  // returns hello with sleep; undefined without
   return ret;    
 }
 ```
@@ -36,7 +36,7 @@ var cp = require('child_process');
 var exec = deasync(cp.exec);
 // output result of ls -la
 console.log(exec('ls -la'));
-// done is printed last with deasync as anticipated; first otherwise.
+// done is printed last with deasync (as supposed); first without.
 console.log('done');
 ```
 
