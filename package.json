@@ -1,7 +1,7 @@
 {
   "name": "deasync",
   "version": "0.0.1",
-  "description": "JavaScript wrapper to run Node.js event loop.",
+  "description": "JavaScript wrapper to Node.js event loop.",
   "main": "index.js",
   "author": "Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
   "contributors": ["Fred Wen <wenfred@gmail.com> (https://github.com/abbr)"],
@@ -17,5 +17,5 @@
 		"url": "https://github.com/abbr/deasync.git"
 	},
 	"homepage": "https://github.com/abbr/deasync",
-	"keywords": ["async", "sync", "sleep"]
+	"keywords": ["async", "sync", "sleep", "async wrapper"]
 }
