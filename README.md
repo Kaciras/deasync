@@ -36,7 +36,7 @@ var cp = require('child_process');
 var exec = deasync(cp.exec);
 // output result of ls -la
 console.log(exec('ls -la'));
-// done is printed last with deasync (as supposed); first without.
+// done is printed last, as supposed, with cp.exec wrapped in deasync; first without.
 console.log('done');
 ```
 
