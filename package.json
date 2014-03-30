@@ -1,6 +1,6 @@
 {
   "name": "deasync",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Turns async function into sync",
   "main": "index.js",
   "author": "Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",

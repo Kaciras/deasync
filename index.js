@@ -45,3 +45,5 @@ module.exports = deasync;
 module.exports.sleep = deasync(function(timeout, done) {
 	setTimeout(done, timeout);
 });
+
+module.exports.runLoopOnce = binding.run;
