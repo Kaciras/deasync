@@ -26,6 +26,21 @@ console.log(exec('ls -la'));
 console.log('done');
 ```
 
+* For async function with non-standard API, for instance `function asyncFunction(p1,function cb(res){})`, use `runLoopOnce`
+
+```
+var done = false;
+var data;
+asyncFunction(p1,function cb(res){
+  data = res;
+  done = true;
+});
+while(!done) {
+  require('deasync').runLoopOnce();
+}
+// data is now populated
+```
+
 * Sleep (a wrapper of setTimeout)
 
 ```
@@ -41,6 +56,7 @@ function SyncFunction(){
   return ret;    
 }
 ```
+
 
 ## Installation
 Prerequisites: Except on a few platforms where binary distribution is included, deasync uses node-gyp to compile C++ source code so you may need the compilers listed in [node-gyp](https://github.com/TooTallNate/node-gyp). 
