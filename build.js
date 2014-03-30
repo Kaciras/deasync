@@ -75,6 +75,8 @@ function afterBuild() {
 
 	try {
 		fs.mkdirSync(path.join(__dirname, 'bin'));
+	} catch (ex) {}
+	try{
 		fs.mkdirSync(path.join(__dirname, 'bin', modPath));
 	} catch (ex) {}
 
