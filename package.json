@@ -1,7 +1,7 @@
 {
   "name": "deasync",
-  "version": "0.0.4",
-  "description": "JavaScript wrapper to Node.js event loop.",
+  "version": "0.0.5",
+  "description": "Turns async function into sync",
   "main": "index.js",
   "author": "Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
   "contributors": ["Fred Wen <wenfred@gmail.com> (https://github.com/abbr)"],
