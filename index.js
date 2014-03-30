@@ -1,4 +1,19 @@
-var binding = require('bindings')('deasync');
+var fs = require('fs'), path = require('path');
+var binding;
+
+// Seed random numbers [gh-82]
+Math.random();
+
+// Look for binary for this platform
+var modPath = path.join(__dirname, 'bin', process.platform+ '-'+ process.arch, 'deasync');
+try {
+	fs.statSync(modPath+ '.node');
+	binding = require(modPath);
+} catch (ex) {
+	binding = require('bindings')('deasync');
+}
+
+
 
 function deasync(fn) {
 	return function() {
