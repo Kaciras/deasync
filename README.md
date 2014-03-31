@@ -59,7 +59,7 @@ function SyncFunction(){
 
 
 ## Installation
-Prerequisites: Except on a few platforms where binary distribution is included, deasync uses node-gyp to compile C++ source code so you may need the compilers listed in [node-gyp](https://github.com/TooTallNate/node-gyp). 
+Prerequisites: Except on a few platforms where binary distribution is included, deasync uses node-gyp to compile C++ source code so you may need the compilers listed in [node-gyp](https://github.com/TooTallNate/node-gyp). You may also need to [update npm's bundled node gyp](https://github.com/TooTallNate/node-gyp/wiki/Updating-npm's-bundled-node-gyp).
 
 To install, run 
 ```npm install deasync```
