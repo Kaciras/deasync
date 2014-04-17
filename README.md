@@ -1,6 +1,6 @@
 deasync
 =======
-deasync turns async function into sync, implemented with a blocking mechanism by way of calling Node.js event loop at JavaScript layer. The core of deasync is writen in C++.
+deasync turns async function into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is writen in C++.
 
 ## Motivation
 Suppose you maintain a library that exposes a function <code>getData</code>. Your users call it to get actual data:   
