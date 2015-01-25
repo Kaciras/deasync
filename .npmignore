@@ -1,4 +1,4 @@
-build
+/build
 /.project
-.c9
-.node-gyp
+/.c9
+/.node-gyp
