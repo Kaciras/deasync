@@ -1,22 +1,24 @@
-#include <node.h>
+#include <uv.h>
 #include <v8.h>
+#include <nan.h>
 
 using namespace v8;
 uv_idle_t idler;
 
-static void crunch_away(uv_idle_t* handle, int status) {
+static void crunch_away(uv_idle_t* handle) {
     uv_idle_stop(handle);
 }
 
-static Handle<Value> Run(const Arguments& args) {
-  HandleScope scope;
-  uv_idle_start(&idler, crunch_away);
+NAN_METHOD(Run) {
+  NanScope();
+  uv_idle_start(&idler, (uv_idle_cb) crunch_away);
   uv_run(uv_default_loop(), UV_RUN_ONCE);
-  return scope.Close(Undefined());
+  NanReturnValue(NanUndefined());
 }
 
-static void Init(Handle<Object> target) {
-  node::SetMethod(target, "run", Run);
+void Init(Handle<Object> exports) {
+  exports->Set(NanNew<String>("run"),
+    NanNew<FunctionTemplate>(Run)->GetFunction());
   uv_idle_init(uv_default_loop(), &idler);
 }
 
