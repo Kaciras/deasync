@@ -28,7 +28,7 @@ function deasync(fn) {
 		fn.apply(this, args);
 
 		while (!done) {
-			binding.run();
+			module.exports.runLoopOnce();
 		}
 		if (err)
 			throw err;
@@ -49,4 +49,7 @@ module.exports.sleep = deasync(function(timeout, done) {
 	setTimeout(done, timeout);
 });
 
-module.exports.runLoopOnce = binding.run;
+module.exports.runLoopOnce = function(){
+	process._tickDomainCallback();
+	binding.run();
+};
