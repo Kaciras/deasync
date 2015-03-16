@@ -69,7 +69,7 @@ Prerequisites: Except on a few [platform and Node version combinations](https://
 To install, run 
 ```npm install deasync```
 
-##License
+## License
 
 The MIT License (MIT)
 
