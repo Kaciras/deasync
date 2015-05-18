@@ -25,5 +25,8 @@
     "sync",
     "sleep",
     "async wrapper"
-  ]
+  ],
+  "engines": {
+    "node": ">=0.11.0"
+  }
 }

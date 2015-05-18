@@ -31,7 +31,7 @@ catch(err){
 console.log('done');
 ```
 
-* For async function with non-standard API, for instance `function asyncFunction(p1,function cb(res){})`, use `runLoopOnce`
+* For async function with non-standard API, for instance `function asyncFunction(p1,function cb(res){})`, use `loopWhile(predicateFunc)` where `predicateFunc` is a function that returns boolean loop condition
 
 ```
 var done = false;
@@ -40,9 +40,7 @@ asyncFunction(p1,function cb(res){
   data = res;
   done = true;
 });
-while(!done) {
-  require('deasync').runLoopOnce();
-}
+require('deasync').loopWhile(function(){return !done;});
 // data is now populated
 ```
 

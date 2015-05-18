@@ -26,10 +26,7 @@ function deasync(fn) {
 		var res;
 
 		fn.apply(this, args);
-
-		while (!done) {
-			module.exports.runLoopOnce();
-		}
+		module.exports.loopWhile(function(){return !done;});
 		if (err)
 			throw err;
 
