@@ -5,14 +5,13 @@
 using namespace v8;
 
 NAN_METHOD(Run) {
-  NanScope();
+  Nan::HandleScope scope;
   uv_run(uv_default_loop(), UV_RUN_ONCE);
-  NanReturnValue(NanUndefined());
+  info.GetReturnValue().Set(Nan::Undefined());
 }
 
-void Init(Handle<Object> exports) {
-  exports->Set(NanNew<String>("run"),
-    NanNew<FunctionTemplate>(Run)->GetFunction());
+static NAN_MODULE_INIT(init) {
+  Nan::Set(target, Nan::New("run").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(Run)).ToLocalChecked());
 }
 
-NODE_MODULE(deasync, Init)
+NODE_MODULE(deasync, init)
