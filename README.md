@@ -66,7 +66,7 @@ __Arguments__
 __Example__
 
 ```js
-var deasync = require('deasync);
+var deasync = require('deasync');
 function SyncFunction(){
   var ret;
   setTimeout(function(){
