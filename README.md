@@ -2,24 +2,56 @@ DeAsync.js
 =======
 [![NPM version](http://img.shields.io/npm/v/deasync.svg)](https://www.npmjs.org/package/deasync)
 
-Deasync is a utility module which provides utilities to wrap asynchronous functions into synchronous equivalent functions. While designed with [Node.js](http://nodejs.org) in mind and installable via `npm install deasync`, the core of deasync is writen in C++.
+Deasync is a utility module which provides utilities to wrap asynchronous functions into synchronous equivalent functions. While designed for javascript with [Node.js](http://nodejs.org)  the core of deasync is writen in C++.
 
 
 ## Installation
 Prerequisites
 
 1. Node v0.11 or higher
-2. Except on a few [platform and Node version combinations](https://github.com/abbr/deasync-bin) where binary distribution is included, deasync uses node-gyp to compile C++ source code so you may need the compilers listed in [node-gyp](https://github.com/TooTallNate/node-gyp). You may also need to [update npm's bundled node gyp](https://github.com/TooTallNate/node-gyp/wiki/Updating-npm's-bundled-node-gyp).
+2. [Node-Gyp](https://github.com/TooTallNate/node-gyp)
+3. Find your platform and Node version combination [here](https://github.com/abbr/deasync-bin). If you **cannot find yours** you may have to install the node-gyp compilers listed [here](https://github.com/TooTallNate/node-gyp)
+4. You may also need to [update npm's bundled node gyp](https://github.com/TooTallNate/node-gyp/wiki/Updating-npm's-bundled-node-gyp).
 
-To install, run 
+To install, run: 
 ```npm install deasync```
 
 
 
-## API Documentation
+## Documentation
+
+<a name="deasync" />
+### deasync(fn)
+
+Creates a synchronous wrapper function around a given asynchronous function `fn`. Returns a `result` that is passed from `fn's` callback function.
+
+**Note:** `fn` is assumed to have a callback function, `cb(error, result)` with an `error` and a `result` parameter that is passed back. 
+
+__Arguments__
+
+* `fn` - Asynchronous function with a callback that follows the general pattern `cb(error, result)`.
+
+__Example__
+
+```js
+var deasync = require('deasync');
+var cp = require('child_process');
+var exec = deasync(cp.exec);
+// output result of ls -la
+try{
+  console.log(exec('ls -la'));
+}
+catch(err){
+  console.log(err);
+}
+// done is printed last, as supposed, with cp.exec wrapped in deasync; first without.
+console.log('done');
+```
+
+---------------------------------------
 
 <a name="sleep" />
-### sleep(timeout, callback)
+### sleep(timeout, [callback])
 
 Run synchronously wrapped version of the `setTimeout()` native Javascript function. The [callback] function will be called after the amount of time (in milliseconds) represented by `timeout` has passed. 
 
@@ -29,18 +61,19 @@ Run synchronously wrapped version of the `setTimeout()` native Javascript functi
 __Arguments__
 
 * `timeout` - An integer that represents time to wait in miliseconds. 
-* `callback()` - A callback to run once the timeout has completed
+* `callback()` - An optional callback to run once the timeout has completed
 
 __Example__
 
 ```js
+var deasync = require('deasync);
 function SyncFunction(){
   var ret;
   setTimeout(function(){
       ret = "hello";
   },3000);
   while(ret === undefined) {
-    require('deasync').sleep(100);
+    deasync.sleep(100);
   }
   // returns hello with sleep; undefined without
   return ret;    
@@ -55,7 +88,7 @@ function SyncFunction(){
 This will continously run in a blocking fashion until `predicate()` returns a `truthy` value. The predicate function will be called every `process.nextTick()`. Code below a `loopUntil` will not be executed while predicate() returns a falsey value;
 
 
-**Note:** when using `sleep()`, it is important to note that it should be taken care that your code does not block the entire thread AND does not incur a busy wait that pegs the CPU to 100%.
+**Note:** when using `loopUntil()`, it is important to note that you should use variables that are defined in your synchrounous function and your `predicate` callback so it is possible to tell `loopUntil()` when to stop blocking your code.
 
 __Arguments__
 
@@ -76,7 +109,7 @@ deasync.loopUntil(function(){return !done;});
 // data is now populated
 ```
 
-## Usages
+## Quick Examples
 * Generic wrapper of async function with standard API signature `function(p1,...pn,function cb(err,res){})`
 
 ```
@@ -124,7 +157,7 @@ function SyncFunction(){
 ```
 
 
-### Motivation
+### Motivation & Further Discussion
 Suppose you maintain a library that exposes a function <code>getData</code>. Your users call it to get actual data:   
 <code>var output = getData();</code>  
 Under the hood data is saved in a file so you implemented <code>getData</code> using Node.js built-in <code>fs.readFileSync</code>. It's obvious both <code>getData</code> and <code>fs.readFileSync</code> are sync functions. One day you were told to switch the underlying data source to a repo such as MongoDB which can only be accessed asynchronously. You were also told to avoid pissing off your users, <code>getData</code> API cannot be changed to return merely a promise or demand a callback parameter. How do you meet both requirements?
