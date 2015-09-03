@@ -113,7 +113,7 @@ deasync.loopUntil(function(){return !done;});
 
 ## Motivation & Further Discussion
 
-See this [stackoverflow post](https://stackoverflow.com/questions/21819858/how-to-wrap-async-function-calls-into-a-sync-function-in-node-js-or-javascript) for inspiration that led to the creation of this library and more in depth discussion.
+####[StackOverflow Post](https://stackoverflow.com/questions/21819858/how-to-wrap-async-function-calls-into-a-sync-function-in-node-js-or-javascript)
 
 <small>
 Suppose you maintain a library that exposes a function <code>getData</code>. Your users call it to get actual data:   
