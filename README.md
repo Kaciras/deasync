@@ -1,6 +1,98 @@
-deasync
+Deasync
 =======
-deasync turns async function into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is writen in C++.
+Deasync is a utility module which provides utilities to wrap asynchronous functions into synchronous equivalent functions. While designed with [Node.js](http://nodejs.org) in mind and installable via `npm install deasync`, the core of deasync is writen in C++.
+
+
+## Installation
+Prerequisites
+
+1. Node v0.11 or higher
+2. Except on a few [platform and Node version combinations](https://github.com/abbr/deasync-bin) where binary distribution is included, deasync uses node-gyp to compile C++ source code so you may need the compilers listed in [node-gyp](https://github.com/TooTallNate/node-gyp). You may also need to [update npm's bundled node gyp](https://github.com/TooTallNate/node-gyp/wiki/Updating-npm's-bundled-node-gyp).
+
+To install, run 
+```npm install deasync```
+
+
+
+##Documentation
+
+---------------------------------------
+
+<a name="sleep" />
+### sleep(timeout, callback)
+
+Run synchronously wrapped version of the `setTimeout()` native Javascript function. The [callback] function will be called after the amount of time (in milliseconds) represented by `timeout` has passed. 
+
+
+**Note:** when using `sleep()`, it is important to note that it should be taken care that your code does not block the entire thread AND does not incur a busy wait that pegs the CPU to 100%.
+
+__Arguments__
+
+* `timeout` - An integer that represents time to wait in miliseconds. 
+* `callback()` - A callback to run once the timeout has completed
+
+__Example__
+
+```js
+function SyncFunction(){
+  var ret;
+  setTimeout(function(){
+      ret = "hello";
+  },3000);
+  while(ret === undefined) {
+    require('deasync').sleep(100);
+  }
+  // returns hello with sleep; undefined without
+  return ret;    
+}
+```
+
+## Usages
+* Generic wrapper of async function with standard API signature `function(p1,...pn,function cb(err,res){})`
+
+```
+var deasync = require('deasync');
+var cp = require('child_process');
+var exec = deasync(cp.exec);
+// output result of ls -la
+try{
+  console.log(exec('ls -la'));
+}
+catch(err){
+  console.log(err);
+}
+// done is printed last, as supposed, with cp.exec wrapped in deasync; first without.
+console.log('done');
+```
+
+* For async function with non-standard API, for instance `function asyncFunction(p1,function cb(res){})`, use `loopWhile(predicateFunc)` where `predicateFunc` is a function that returns boolean loop condition
+
+```
+var done = false;
+var data;
+asyncFunction(p1,function cb(res){
+  data = res;
+  done = true;
+});
+require('deasync').loopWhile(function(){return !done;});
+// data is now populated
+```
+
+* Sleep (a wrapper of setTimeout)
+
+```
+function SyncFunction(){
+  var ret;
+  setTimeout(function(){
+      ret = "hello";
+  },3000);
+  while(ret === undefined) {
+    require('deasync').sleep(100);
+  }
+  // returns hello with sleep; undefined without
+  return ret;    
+}
+```
 
 ## Motivation
 Suppose you maintain a library that exposes a function <code>getData</code>. Your users call it to get actual data:   
