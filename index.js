@@ -2,7 +2,7 @@
  * deasync
  * https://github.com/abbr/deasync
  *
- * Copyright 2010-2015 Abbr
+ * Copyright 2014-2015 Abbr
  * Released under the MIT license
  */
  
@@ -12,8 +12,8 @@
 		path = require('path'),
 		binding;
 	
-	// Seed random numbers [gh-82]
-	Math.random();
+	// Seed random numbers [gh-82] if on Windows. See https://github.com/laverdet/node-fibers/issues/82
+	if(process.platform === 'win32') Math.random();
 	
 	// Look for binary for this platform
 	var nodeV = 'node-' + /[0-9]+\.[0-9]+/.exec(process.versions.node)[0];
@@ -27,8 +27,7 @@
 	}
 	
 	
-	
-	deasync = function (fn) {
+	var deasync = function (fn) {
 		return function() {
 			var done = false,
 				err,
