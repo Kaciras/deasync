@@ -70,6 +70,13 @@ Prerequisites
 To install, run 
 ```npm install deasync```
 
+## Support
+Pull requests and issue reporting are welcome. For issues to be considered by maintainer:
+  1. they must be reproducible.
+  2. there must be evidence the issue is related to `deasync`.
+
+To that end, the issue should contain platform information, error message relevant to `deasync`, and preferably code snippet. If code snippet is supplied, it must be self-contained, i.e. independent from your runtime environment or other modules not explictly specified via `require` in the code snippet.
+
 ## License
 
 The MIT License (MIT)
