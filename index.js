@@ -7,9 +7,16 @@ Math.random();
 
 // Look for binary for this platform
 var nodeV = 'node-' + /[0-9]+\.[0-9]+/.exec(process.versions.node)[0];
+var nodeVM = 'node-' + /[0-9]+/.exec(process.versions.node)[0];
 var modPath = path.join(__dirname, 'bin', process.platform + '-' + process.arch + '-' + nodeV, 'deasync');
 try {
-	fs.statSync(modPath + '.node');
+	try{
+		fs.statSync(modPath + '.node');
+	}
+	catch(ex){
+		modPath = path.join(__dirname, 'bin', process.platform + '-' + process.arch + '-' + nodeVM, 'deasync');
+		fs.statSync(modPath + '.node');
+	}
 	binding = require(modPath);
 }
 catch (ex) {
