@@ -10,7 +10,8 @@ var force = false,
 var
 	arch = process.arch,
 	platform = process.platform,
-	nodeV = /[0-9]+\.[0-9]+/.exec(process.versions.node)[0];
+	nodeV = /[0-9]+\.[0-9]+/.exec(process.versions.node)[0],
+	nodeVM = /[0-9]+/.exec(process.versions.node)[0];
 var args = process.argv.slice(2).filter(function(arg) {
 	if (arg === '-f') {
 		force = true;
@@ -37,7 +38,13 @@ if (!{
 var modPath = platform + '-' + arch + '-node-' + nodeV;
 if (!force) {
 	try {
-		fs.statSync(path.join(__dirname, 'bin', modPath, 'deasync.node'));
+		try{
+			fs.statSync(path.join(__dirname, 'bin', modPath, 'deasync.node'));
+		}
+		catch(ex){
+			modPath = platform + '-' + arch + '-node-' + nodeVM;
+			fs.statSync(path.join(__dirname, 'bin', modPath, 'deasync.node'));
+		}
 		console.log('`' + modPath + '` exists; testing');
 		cp.execFile(process.execPath, ['quick-test.js'], function(err, stdout, stderr) {
 			if (err || stdout !== 'pass' || stderr) {
