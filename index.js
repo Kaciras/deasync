@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*!
  * deasync
  * https://github.com/abbr/deasync
@@ -34,7 +33,6 @@
 	catch (ex) {
 		binding = require('bindings')('deasync');
 	}
-
 	function deasync(fn) {
 		return function() {
 			var done = false;
