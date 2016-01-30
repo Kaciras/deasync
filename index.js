@@ -66,7 +66,7 @@
 		binding.run();
 	};
 	
-	module.exports.loopUntil = function(pred){
+	module.exports.loopWhile = function(pred){
 	  while(pred()){
 		process._tickDomainCallback();
 		if(pred()) binding.run();
