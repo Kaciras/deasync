@@ -28,7 +28,9 @@ var args = process.argv.slice(2).filter(function(arg) {
 if (!{
 		ia32: true,
 		x64: true,
-		arm: true
+		arm: true,
+		ppc64: true,
+		ppc: true
 	}.hasOwnProperty(arch)) {
 	console.error('Unsupported (?) architecture: `' + arch + '`');
 	process.exit(1);
