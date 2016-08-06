@@ -25,16 +25,16 @@ DeAsync supports both alternatives.
 
 * Generic wrapper of async function with standard API signature `function(p1,...pn,function cb(error,result){})`. Returns `result` and throws `error` as exception if not null:
 
-```
+```javascript
 var deasync = require('deasync');
 var cp = require('child_process');
 var exec = deasync(cp.exec);
 // output result of ls -la
 try{
-  console.log(exec('ls -la'));
+    console.log(exec('ls -la'));
 }
 catch(err){
-  console.log(err);
+    console.log(err);
 }
 // done is printed last, as supposed, with cp.exec wrapped in deasync; first without.
 console.log('done');
@@ -42,12 +42,12 @@ console.log('done');
 
 * For async function with non-standard API, for instance `function asyncFunction(p1,function cb(res){})`, use `loopWhile(predicateFunc)` where `predicateFunc` is a function that returns boolean loop condition
 
-```
+```javascript
 var done = false;
 var data;
 asyncFunction(p1,function cb(res){
-  data = res;
-  done = true;
+    data = res;
+    done = true;
 });
 require('deasync').loopWhile(function(){return !done;});
 // data is now populated
@@ -55,7 +55,7 @@ require('deasync').loopWhile(function(){return !done;});
 
 * Sleep (a wrapper of setTimeout)
 
-```
+```javascript
 function SyncFunction(){
   var ret;
   setTimeout(function(){
