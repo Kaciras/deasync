@@ -29,6 +29,7 @@ if (!{
 		ia32: true,
 		x64: true,
 		arm: true,
+		arm64: true,
 		ppc64: true,
 		ppc: true
 	}.hasOwnProperty(arch)) {
