@@ -6,3 +6,4 @@
 /.node-gyp
 /test/
 /node-src/
+*.sublime-workspace

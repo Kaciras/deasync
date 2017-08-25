@@ -4,3 +4,5 @@ build/
 .node-gyp
 test/
 node-src/
+*.sublime-project
+*.sublime-workspace
