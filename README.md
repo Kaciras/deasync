@@ -70,15 +70,12 @@ function SyncFunction(){
 ```
 
 ## Installation
-Prerequisites
+Except on a few [ platforms + Node version combinations](https://github.com/abbr/deasync-bin) where binary distribution is included, DeAsync uses node-gyp to compile C++ source code so you may need the compilers listed in [node-gyp](https://github.com/TooTallNate/node-gyp). You may also need to [update npm's bundled node-gyp](https://github.com/TooTallNate/node-gyp/wiki/Updating-npm's-bundled-node-gyp).
 
-1. Node v0.11+
-2. [Node-Gyp](https://github.com/TooTallNate/node-gyp)
-3. Find your platform and Node version combination [here](https://github.com/abbr/deasync-bin). If you **cannot find yours** you may have to install the node-gyp compilers listed [here](https://github.com/TooTallNate/node-gyp)
-4. You may also need to [update npm's bundled node gyp](https://github.com/TooTallNate/node-gyp/wiki/Updating-npm's-bundled-node-gyp).
+To install, run
 
-To install, run: 
 ```npm install deasync```
+
 
 ## Recommendation
 Unlike other (a)sync js packages that mostly have only syntactic impact, DeAsync also changes code execution sequence. As such, it is intended to solve niche cases like the above one. If all you are facing is syntatic problem such as callback hell, using a less drastic package implemented in pure js is recommended.
