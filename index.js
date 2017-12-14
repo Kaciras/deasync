@@ -62,13 +62,13 @@
 	});
 	
 	module.exports.runLoopOnce = function(){
-		process._tickDomainCallback();
+		process._tickCallback();
 		binding.run();
 	};
 	
 	module.exports.loopWhile = function(pred){
 	  while(pred()){
-		process._tickDomainCallback();
+		process._tickCallback();
 		if(pred()) binding.run();
 	  }
 	};
