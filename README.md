@@ -23,7 +23,7 @@ DeAsync supports both alternatives.
 ## Usages
 
 
-* Generic wrapper of async function with standard API signature `function(p1,...pn,function cb(error,result){})`. Returns `result` and throws `error` as exception if not null:
+* Generic wrapper of async function with conventional API signature `function(p1,...pn,function cb(error,result){})`. Returns `result` and throws `error` as exception if not null:
 
 ```javascript
 var deasync = require('deasync');
@@ -40,7 +40,7 @@ catch(err){
 console.log('done');
 ```
 
-* For async function with non-standard API, for instance `function asyncFunction(p1,function cb(res){})`, use `loopWhile(predicateFunc)` where `predicateFunc` is a function that returns boolean loop condition
+* For async function with unconventional API, for instance `function asyncFunction(p1,function cb(res){})`, use `loopWhile(predicateFunc)` where `predicateFunc` is a function that returns boolean loop condition
 
 ```javascript
 var done = false;
