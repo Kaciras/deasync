@@ -1,12 +1,6 @@
-var deasync = require('./index.js')
-var cp = require('child_process')
+var deasync = require('../../index.js')
 var https = require('https')
 
-var exec = deasync(cp.exec)
-
-var sleep = deasync(function (timeout, done) {
-  setTimeout(done, timeout)
-})
 
 var request = deasync(function (url, done) {
   https.get(url, function (res) {
@@ -25,11 +19,4 @@ var request = deasync(function (url, done) {
   }).on('error', done)
 })
 
-
-setTimeout(function () {
-  console.log('async')
-}, 1000)
-
-console.log(exec('ls -la'))
-sleep(2000)
-console.log(request('https://nodejs.org/en/'))
+request('https://nodejs.org/en/')

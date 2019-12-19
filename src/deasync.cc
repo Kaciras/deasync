@@ -2,13 +2,12 @@
 #include <v8.h>
 #include <napi.h>
 #include <uv.h>
-
-using namespace Napi;
+#include <node.h>
 
 Napi::Value Run(const Napi::CallbackInfo& info) {
   Napi::Env env = info.Env();
   Napi::HandleScope scope(env);
-  uv_run(uv_default_loop(), UV_RUN_ONCE);
+  uv_run(node::GetCurrentEventLoop(v8::Isolate::GetCurrent()), UV_RUN_ONCE);
   return env.Undefined();
 }
 
