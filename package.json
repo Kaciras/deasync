@@ -21,6 +21,7 @@
 		"node": ">=14"
 	},
 	"main": "index.js",
+	"types": "index.d.ts",
 	"scripts": {
 		"install": "node script/prebuild.js install",
 		"test": "jest"
