@@ -4,6 +4,5 @@
 /bin
 /.c9
 /.node-gyp
-/test/
 /node-src/
 *.sublime-workspace
