@@ -1,27 +1,28 @@
-import binding from "./build/Release/binding.node";
+import { run } from "./build/Release/binding.node";
 
 function loopWhile(pred: () => boolean) {
 	while (pred()) {
 		process._tickCallback();
-		if (pred()) binding.run();
+		if (pred()) run();
 	}
 }
 
 type Fn<T, A extends any[], R> = (this: T, ...args: A) => R;
 
+// Don't use enum as TS can't analyze the async-to-sync control flow.
 const State = {
 	Pending: 0,
 	Fulfilled: 1,
 	Rejected: 2,
 };
 
-export function deasync<T, A extends any[], R>(fn: Fn<T, A, R>) {
+export function deasync<T, R>(fn: Fn<T, any[], R>) {
 
 	return function (this: T, ...args: any[]) {
 		let state = State.Pending;
 		let value: unknown;
 
-		args.push((err: any, res: R) => {
+		args.push((err: unknown, res: R) => {
 			if (err) {
 				value = err;
 				state = State.Rejected;
@@ -32,7 +33,7 @@ export function deasync<T, A extends any[], R>(fn: Fn<T, A, R>) {
 		});
 
 		fn.apply(this, args);
-		loopWhile(() => state !== State.Pending);
+		loopWhile(() => state === State.Pending);
 
 		if (state === State.Rejected) {
 			throw value;
@@ -60,7 +61,7 @@ export function awaitSync<T>(promise: Promise<T> | PromiseLike<T>) {
 		});
 	}
 
-	loopWhile(() => state !== State.Pending);
+	loopWhile(() => state === State.Pending);
 
 	if (state === State.Rejected) {
 		throw value;
