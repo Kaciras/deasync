@@ -24,18 +24,20 @@
 	"types": "index.d.ts",
 	"scripts": {
 		"install": "node script/prebuild.js install",
-		"test": "jest"
+		"test": "mocha test"
 	},
 	"dependencies": {
 		"follow-redirects": "^1.14.1",
 		"tar-fs": "^2.1.1"
 	},
 	"devDependencies": {
-		"@kaciras/eslint-config-core": "^1.2.0",
-		"@kaciras/eslint-config-jest": "^1.2.0",
-		"@types/jest": "^26.0.23",
-		"eslint": "^7.17.0",
-		"jest": "^27.0.4",
+		"@kaciras/eslint-config-core": "^1.5.0",
+		"@kaciras/eslint-config-typescript": "^1.5.0",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "^15.12.2",
+		"eslint": "^7.28.0",
+		"mocha": "^9.0.0",
+		"ts-node": "^10.0.0",
 		"typescript": "^4.3.2"
 	}
 }
