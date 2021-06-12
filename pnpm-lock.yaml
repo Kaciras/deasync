@@ -3,8 +3,10 @@ lockfileVersion: 5.3
 specifiers:
   '@kaciras/eslint-config-core': ^1.5.0
   '@kaciras/eslint-config-typescript': ^1.5.0
+  '@types/follow-redirects': ^1.13.0
   '@types/mocha': ^8.2.2
   '@types/node': ^15.12.2
+  '@types/tar-fs': ^2.0.0
   eslint: ^7.28.0
   follow-redirects: ^1.14.1
   mocha: ^9.0.0
@@ -19,8 +21,10 @@ dependencies:
 devDependencies:
   '@kaciras/eslint-config-core': 1.5.0_eslint@7.28.0
   '@kaciras/eslint-config-typescript': 1.5.0_eslint@7.28.0+typescript@4.3.2
+  '@types/follow-redirects': 1.13.0
   '@types/mocha': 8.2.2
   '@types/node': 15.12.2
+  '@types/tar-fs': 2.0.0
   eslint: 7.28.0
   mocha: 9.0.0
   ts-node: 10.0.0_e3fb3700f8b176f300f1b7e599dc9c29
@@ -126,6 +130,12 @@ packages:
     resolution: {integrity: sha512-FTgBI767POY/lKNDNbIzgAX6miIDBs6NTCbdlDb8TrWovHsSvaVIZDlTqym29C6UqhzwcJx4CYr+AlrMywA0cA==}
     dev: true
 
+  /@types/follow-redirects/1.13.0:
+    resolution: {integrity: sha512-VPGDD77WMB+da4l1vdfGYM1k9ZjtPyY8EHisvc33QUcwCf/stt/5M1P/ZOPhpnjPgBwJX/xuo3X3wFVp0rutTA==}
+    dependencies:
+      '@types/node': 15.12.2
+    dev: true
+
   /@types/json-schema/7.0.7:
     resolution: {integrity: sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==}
     dev: true
@@ -136,6 +146,19 @@ packages:
 
   /@types/node/15.12.2:
     resolution: {integrity: sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==}
+    dev: true
+
+  /@types/tar-fs/2.0.0:
+    resolution: {integrity: sha512-3H2HmxuT1OCZYXi1KG5xIjbpv97JjdLSRByH13YhHK8lr+GaJndJ91IuQfHxn23BQRaWHf2LTnlHPQcQDzt8vw==}
+    dependencies:
+      '@types/node': 15.12.2
+      '@types/tar-stream': 2.2.0
+    dev: true
+
+  /@types/tar-stream/2.2.0:
+    resolution: {integrity: sha512-sRTpT180sVigzD4SiCWJQQrqcdkWnmscWvx+cXvAoPtXbLFC5+QmKi2xwRcPe4iRu0GcVl1qTeJKUTS5hULfrw==}
+    dependencies:
+      '@types/node': 15.12.2
     dev: true
 
   /@typescript-eslint/eslint-plugin/4.26.1_c8cbd5e7f5f92609ec78d991aced454b:
