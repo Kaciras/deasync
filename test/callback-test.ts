@@ -1,6 +1,7 @@
 import * as assert from "assert";
 import { readFile } from "fs";
 import { performance } from "perf_hooks";
+import { callbackify } from "util";
 import { deasync } from "../index";
 
 it("should pass arguments correctly", () => {
@@ -52,4 +53,8 @@ it("should throw error from macro task", () => {
 	} catch (err) {
 		assert.strictEqual(err.code, "ENOENT");
 	}
+});
+
+it("should work with combined Promise and callback", () => {
+	deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 500))))();
 });
