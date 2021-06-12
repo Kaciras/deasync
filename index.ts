@@ -1,3 +1,4 @@
+/// <reference types="./missing-types" />
 import { run } from "./build/Release/binding.node";
 
 function loopWhile(pred: () => boolean) {
@@ -58,6 +59,12 @@ export function deasync<T, R>(fn: Fn<T, any[], R>) {
 	};
 }
 
+/**
+ * Similar with keyword `await` but synchronously.
+ *
+ * @param promise A Promise or any value to wait for
+ * @return Returns the fulfilled value of the promise, or the value itself if it's not a Promise.
+ */
 export function awaitSync<T>(promise: PromiseLike<T> | T) {
 	let state = State.Pending;
 	let value: unknown;

@@ -1,8 +1,4 @@
 {
-	"files": [
-		"missing-types.d.ts",
-		"index.ts"
-	],
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "CommonJS",
