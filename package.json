@@ -3,10 +3,6 @@
 	"version": "0.1.21",
 	"description": "Turns async code into sync via JavaScript wrapper of Node event loop, support both callback and promise",
 	"author": "Kaciras <Kaciras@protonmail.com>",
-	"contributors": [
-		"Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
-		"Fred Wen <wenfred@gmail.com> (https://github.com/abbr)"
-	],
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -16,15 +12,26 @@
 	"keywords": [
 		"async",
 		"sync",
+		"syncify",
+		"promise",
 		"async wrapper"
 	],
 	"engines": {
 		"node": ">=14"
 	},
 	"main": "index.js",
+	"types": "index.d.ts",
+	"files": [
+		"binding.gyp",
+		"src",
+		"script",
+		"index.js",
+		"index.ts"
+	],
 	"scripts": {
+		"lint": "eslint --fix --ext ts .",
 		"install": "node script/prebuild.js install",
-		"test": "mocha test"
+		"test": "mocha"
 	},
 	"dependencies": {
 		"follow-redirects": "^1.14.1",
