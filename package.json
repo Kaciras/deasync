@@ -1,17 +1,18 @@
 {
-	"name": "deasync",
+	"name": "@kaciras/deasync",
 	"version": "0.1.21",
-	"description": "Turns async function into sync via JavaScript wrapper of Node event loop",
-	"author": "Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
+	"description": "Turns async code into sync via JavaScript wrapper of Node event loop, support both callback and promise",
+	"author": "Kaciras <Kaciras@protonmail.com>",
 	"contributors": [
+		"Vladimir Kurchatkin <vladimir.kurchatkin@gmail.com>",
 		"Fred Wen <wenfred@gmail.com> (https://github.com/abbr)"
 	],
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/abbr/deasync.git"
+		"url": "https://github.com/Kaciras/deasync.git"
 	},
-	"homepage": "https://github.com/abbr/deasync",
+	"homepage": "https://github.com/Kaciras/deasync",
 	"keywords": [
 		"async",
 		"sync",
@@ -21,7 +22,6 @@
 		"node": ">=14"
 	},
 	"main": "index.js",
-	"types": "index.d.ts",
 	"scripts": {
 		"install": "node script/prebuild.js install",
 		"test": "mocha test"
