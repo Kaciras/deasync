@@ -3,6 +3,11 @@ import { readFile } from "fs/promises";
 import { performance } from "perf_hooks";
 import { awaitSync } from "../index";
 
+it("should just return if argument is not a Promise", () => {
+	const value = new Error();
+	assert(awaitSync(value) === value);
+});
+
 it("should work with Promise.resolve", () => {
 	const result = awaitSync(Promise.resolve(114514));
 	assert.strictEqual(result, 114514);

@@ -3,6 +3,24 @@ import { readFile } from "fs";
 import { performance } from "perf_hooks";
 import { deasync } from "../index";
 
+it("should pass arguments correctly", () => {
+
+	function testFn(this: any, ...args: any[]) {
+		const i = args.length - 1;
+		const callback = args[i];
+		return callback(null, { self: this, args });
+	}
+
+	const object = { testFn: deasync(testFn) };
+	const { self, args } = object.testFn("foo", "bar");
+
+	assert.strictEqual(args.length, 3);
+	assert(self === object);
+	assert.strictEqual(args[0], "foo");
+	assert.strictEqual(args[1], "bar");
+	assert(typeof args[2] === "function");
+});
+
 it("should work with sync function", () => {
 	const fn = deasync(callback => callback(null, 114514));
 	assert.strictEqual(fn(), 114514);

@@ -7,15 +7,28 @@ function loopWhile(pred: () => boolean) {
 	}
 }
 
+function isThenable<T>(value: any): value is PromiseLike<T> {
+	return typeof value.then === "function";
+}
+
 type Fn<T, A extends any[], R> = (this: T, ...args: A) => R;
 
-// Don't use enum as TS can't analyze the async-to-sync control flow.
+// Can't use enum as async-to-sync breaks the control flow analyzing.
 const State = {
 	Pending: 0,
 	Fulfilled: 1,
 	Rejected: 2,
 };
 
+/**
+ * Generic wrapper of async function with conventional API signature
+ * `function (p1,...pn, (error, result) => {})`.
+ *
+ * Returns `result` and throws `error` as exception if not null
+ *
+ * @param fn the original callback style function
+ * @return wrapped function
+ */
 export function deasync<T, R>(fn: Fn<T, any[], R>) {
 
 	return function (this: T, ...args: any[]) {
@@ -45,21 +58,21 @@ export function deasync<T, R>(fn: Fn<T, any[], R>) {
 	};
 }
 
-export function awaitSync<T>(promise: Promise<T> | PromiseLike<T>) {
-	let value: unknown;
+export function awaitSync<T>(promise: PromiseLike<T> | T) {
 	let state = State.Pending;
+	let value: unknown;
+
+	if (!isThenable(promise)) {
+		return promise;
+	}
 
 	promise.then(res => {
 		value = res;
 		state = State.Fulfilled;
+	}, err => {
+		value = err;
+		state = State.Rejected;
 	});
-
-	if ("catch" in promise) {
-		promise.catch(err => {
-			value = err;
-			state = State.Rejected;
-		});
-	}
 
 	loopWhile(() => state === State.Pending);
 
