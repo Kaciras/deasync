@@ -1,8 +1,11 @@
 /build
 /node_modules
+.idea
 /.project
 /bin
-/.c9
 /.node-gyp
-/node-src/
-*.sublime-workspace
+
+/index.js
+/temp.js
+/test/*.js
+*.d.ts
