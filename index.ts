@@ -30,7 +30,7 @@ const State = {
  * @param fn the original callback style function
  * @return wrapped function
  */
-export function deasync<T, R>(fn: Fn<T, any[], R>) {
+export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
 
 	return function (this: T, ...args: any[]) {
 		let state = State.Pending;

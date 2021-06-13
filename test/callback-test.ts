@@ -9,7 +9,7 @@ it("should pass arguments correctly", () => {
 	function testFn(this: any, ...args: any[]) {
 		const i = args.length - 1;
 		const callback = args[i];
-		return callback(null, { self: this, args });
+		callback(null, { self: this, args });
 	}
 
 	const object = { testFn: deasync(testFn) };
