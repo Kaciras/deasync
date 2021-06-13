@@ -20,13 +20,13 @@
 		"node": ">=14"
 	},
 	"main": "index.js",
-	"types": "index.ts",
+	"types": "index.d.ts",
 	"files": [
 		"binding.gyp",
 		"src",
 		"script",
 		"index.js",
-		"index.ts"
+		"index.d.ts"
 	],
 	"scripts": {
 		"lint": "eslint --fix --ext ts .",
