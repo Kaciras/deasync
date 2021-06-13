@@ -1,10 +1,10 @@
-import { execSync } from "child_process";
-import { join } from "path";
-import * as fs from "fs";
-import { createBrotliCompress, createBrotliDecompress } from "zlib";
-import { https } from "follow-redirects";
-import * as tar from "tar-fs";
-import packageJson from "../package.json";
+const { execSync } = require("child_process");
+const { join } = require("path");
+const fs = require("fs");
+const { createBrotliCompress, createBrotliDecompress } = require("zlib");
+const { https } = require("follow-redirects");
+const tar = require("tar-fs");
+const packageJson = require("../package.json");
 
 process.chdir(join(__dirname, ".."));
 
@@ -18,7 +18,7 @@ function getPackageName() {
 	const abi = "NAPIv3";
 	const { platform, arch } = process;
 
-	return `${name}-v${version}-${runtime}-${abi}-${platform}-${arch}.tar.br`;
+	return `${name}-v${version}-${runtime}-v${abi}-${platform}-${arch}.tar.br`;
 }
 
 function getGithubRelease() {
@@ -75,7 +75,7 @@ function download() {
 	request.on("error", handleInstallError).end();
 }
 
-function handleInstallError(error: string) {
+function handleInstallError(error) {
 	console.warn(error);
 
 	try {

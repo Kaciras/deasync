@@ -50,9 +50,7 @@ before_script: node-gyp rebuild
 
 script: pnpm test
 
-after_success:
-  - pnpm run compile:ts
-  - node script/prebuild.js pack
+after_success: node script/prebuild.js pack
 
 deploy:
   provider: releases

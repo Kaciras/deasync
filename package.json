@@ -31,8 +31,7 @@
 	"scripts": {
 		"lint": "eslint --fix --ext ts .",
 		"install": "node script/prebuild.js install",
-		"test": "mocha",
-		"compile:ts": "tsc"
+		"test": "mocha"
 	},
 	"dependencies": {
 		"follow-redirects": "^1.14.1",
@@ -41,10 +40,8 @@
 	"devDependencies": {
 		"@kaciras/eslint-config-core": "^1.5.0",
 		"@kaciras/eslint-config-typescript": "^1.5.0",
-		"@types/follow-redirects": "^1.13.0",
 		"@types/mocha": "^8.2.2",
 		"@types/node": "^15.12.2",
-		"@types/tar-fs": "^2.0.0",
 		"eslint": "^7.28.0",
 		"mocha": "^9.0.0",
 		"ts-node": "^10.0.0",
