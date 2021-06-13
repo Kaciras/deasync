@@ -20,7 +20,7 @@
 		"node": ">=14"
 	},
 	"main": "index.js",
-	"types": "index.d.ts",
+	"types": "index.ts",
 	"files": [
 		"binding.gyp",
 		"src",
