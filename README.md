@@ -1,7 +1,7 @@
 # DeAsync
 
-[![NPM version](http://img.shields.io/npm/v/deasync.svg)](https://www.npmjs.org/package/deasync)
-[![Build Status](https://travis-ci.com/Kaciras/deasync.svg?branch=main)](https://travis-ci.com/Kaciras/deasync)
+[![Npm Version](https://img.shields.io/npm/v/@kaciras/deasync)](https://www.npmjs.com/package/@kaciras/deasync)
+[![Build Status](https://www.travis-ci.com/Kaciras/deasync.svg?branch=master)](https://www.travis-ci.com/Kaciras/deasync)
 
 DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is writen in C++.
 
