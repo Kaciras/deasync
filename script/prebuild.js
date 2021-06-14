@@ -18,7 +18,7 @@ function getPackageName() {
 	const abi = "NAPIv3";
 	const { platform, arch } = process;
 
-	return `${name}-v${version}-${runtime}-v${abi}-${platform}-${arch}.tar.br`;
+	return `${name}-v${version}-${runtime}-${abi}-${platform}-${arch}.tar.br`;
 }
 
 function getGithubRelease() {
