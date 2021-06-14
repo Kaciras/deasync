@@ -34,14 +34,14 @@ export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
 
 	return function (this: T, ...args: any[]) {
 		let state = State.Pending;
-		let value: unknown;
+		let valueOrError: unknown;
 
 		args.push((err: unknown, res: R) => {
 			if (err) {
-				value = err;
+				valueOrError = err;
 				state = State.Rejected;
 			} else {
-				value = res;
+				valueOrError = res;
 				state = State.Fulfilled;
 			}
 		});
@@ -50,11 +50,9 @@ export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
 		loopWhile(() => state === State.Pending);
 
 		if (state === State.Rejected) {
-			throw value;
-		} else if (state === State.Fulfilled) {
-			return value as R;
+			throw valueOrError;
 		} else {
-			throw new Error("Invalid state, it's a bug in @kaciras/deasync");
+			return valueOrError as R;
 		}
 	};
 }
@@ -67,27 +65,25 @@ export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
  */
 export function awaitSync<T>(promise: PromiseLike<T> | T) {
 	let state = State.Pending;
-	let value: unknown;
+	let valueOrError: unknown;
 
 	if (!isThenable(promise)) {
 		return promise;
 	}
 
 	promise.then(res => {
-		value = res;
+		valueOrError = res;
 		state = State.Fulfilled;
 	}, err => {
-		value = err;
+		valueOrError = err;
 		state = State.Rejected;
 	});
 
 	loopWhile(() => state === State.Pending);
 
 	if (state === State.Rejected) {
-		throw value;
-	} else if (state === State.Fulfilled) {
-		return value as T;
+		throw valueOrError;
 	} else {
-		throw new Error("Invalid state, it's a bug in @kaciras/deasync");
+		return valueOrError as T;
 	}
 }
