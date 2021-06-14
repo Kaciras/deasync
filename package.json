@@ -31,19 +31,22 @@
 	"scripts": {
 		"lint": "eslint --fix --ext ts .",
 		"install": "node script/prebuild.js install",
-		"test": "mocha"
+		"test": "mocha",
+		"test:coverage": "nyc mocha"
 	},
 	"dependencies": {
 		"follow-redirects": "^1.14.1",
 		"tar-fs": "^2.1.1"
 	},
 	"devDependencies": {
+		"@istanbuljs/nyc-config-typescript": "^1.0.1",
 		"@kaciras/eslint-config-core": "^1.5.0",
 		"@kaciras/eslint-config-typescript": "^1.5.0",
 		"@types/mocha": "^8.2.2",
 		"@types/node": "^15.12.2",
 		"eslint": "^7.28.0",
 		"mocha": "^9.0.0",
+		"nyc": "^15.1.0",
 		"ts-node": "^10.0.0",
 		"typescript": "^4.3.2"
 	}

@@ -1,4 +1,5 @@
 {
+	"files": ["index.ts"],
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "CommonJS",

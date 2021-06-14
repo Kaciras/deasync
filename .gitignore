@@ -4,6 +4,8 @@
 /.project
 /bin
 /.node-gyp
+.nyc*
+/coverage
 
 /index.js
 /temp.js
