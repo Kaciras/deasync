@@ -2,10 +2,11 @@
 
 [![Npm Version](https://img.shields.io/npm/v/@kaciras/deasync)](https://www.npmjs.com/package/@kaciras/deasync)
 [![Build Status](https://www.travis-ci.com/Kaciras/deasync.svg?branch=master)](https://www.travis-ci.com/Kaciras/deasync)
+[![codecov](https://codecov.io/gh/Kaciras/deasync/branch/master/graph/badge.svg?token=ST7ROWQH0Z)](https://codecov.io/gh/Kaciras/deasync)
 
 DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is writen in C++.
 
-This project is a fork from [abbr/deasync](https://github.com/abbr/deasync) and rewrite with modern code. There are some new features added: TypeScript types, Promise support, and prebuild binaries.
+This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewrite in modern code. There are some new features added: TypeScript types, Promise support, and prebuild binaries.
 
 ## Motivation
 
@@ -21,13 +22,17 @@ DeAsync supports both alternatives.
 
 ## Installation
 
-```npm install @kaciras/deasync```
+```shell
+npm install @kaciras/deasync
+```
 
 By default, Deasync downloads prebuild binary from GitHub releases
 
 Except on a few [platforms + Node version combinations](https://github.com/abbr/deasync-bin) where binary distribution is included, DeAsync uses node-gyp to compile C++ source code so you may need the compilers listed in [node-gyp](https://github.com/TooTallNate/node-gyp). You may also need to [update npm's bundled node-gyp](https://github.com/TooTallNate/node-gyp/wiki/Updating-npm's-bundled-node-gyp).
 
 ## Usages
+
+Deasync exports two APIs: `deasync` for callback style function, and `awaitSync` for Promise.
 
 ### `deasync(function)`
 
@@ -49,7 +54,7 @@ console.log("Timestamp after: " + performance.now());
 
 ### `awaitSync(promise)`
 
-The `awaitSync` causes execution to pause until a Promise is settled (that is, fulfilled or rejected), and to resume execution of the async function after fulfillment. When resumed, the returned value of the `awaitSync` is that of the fulfilled Promise. If the Promise is rejected, the `awaitSync` throws the rejected value.
+The `awaitSync` causes execution to pause until a Promise is settled (that is, fulfilled or rejected), and to resume execution of after fulfillment. When resumed, the returned value of the `awaitSync` is that of the fulfilled Promise. If the Promise is rejected, the `awaitSync` throws the rejected value.
 
 This function is similar with keyword `await` but synchronously.
 
