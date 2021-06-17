@@ -42,7 +42,7 @@ it("should work with macro task", () => {
 
 	const start = performance.now();
 	sleep(400);
-	assert(performance.now() - start > 400);
+	assert(performance.now() - start >= 400);
 });
 
 it("should throw error from macro task", () => {
@@ -56,5 +56,5 @@ it("should throw error from macro task", () => {
 });
 
 it("should work with combined Promise and callback", () => {
-	deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 500))))();
+	deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 100))))();
 });

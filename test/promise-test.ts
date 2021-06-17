@@ -28,7 +28,7 @@ it("should work with macro task", () => {
 	const sleeping = new Promise(resolve => setTimeout(resolve, 400));
 
 	awaitSync(sleeping);
-	assert(performance.now() - start > 400);
+	assert(performance.now() - start >= 400);
 });
 
 it("should throw error from macro task", () => {
