@@ -8,10 +8,18 @@ function loopWhile(pred: () => boolean) {
 	}
 }
 
+/**
+ * Determine whether the value is a Promise.
+ *
+ * @see https://promisesaplus.com/
+ */
 function isThenable<T>(value: any): value is PromiseLike<T> {
 	return typeof value.then === "function";
 }
 
+/**
+ * A generic replacement of the `Function` type.
+ */
 type Fn<T, A extends any[], R> = (this: T, ...args: A) => R;
 
 // Can't use enum as async-to-sync breaks the control flow analyzing.
@@ -23,36 +31,36 @@ const State = {
 
 /**
  * Generic wrapper of async function with conventional API signature
- * `function (p1,...pn, (error, result) => {})`.
+ * `function (...args, (error, result) => {})`.
  *
- * Returns `result` and throws `error` as exception if not null
+ * Returns `result` and throws `error` as exception if not null.
  *
  * @param fn the original callback style function
- * @return wrapped function
+ * @return the wrapped function
  */
 export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
 
 	return function (this: T, ...args: any[]) {
 		let state = State.Pending;
-		let valueOrError: unknown;
+		let resultOrError: unknown;
 
 		args.push((err: unknown, res: R) => {
 			if (err) {
-				valueOrError = err;
+				resultOrError = err;
 				state = State.Rejected;
 			} else {
-				valueOrError = res;
+				resultOrError = res;
 				state = State.Fulfilled;
 			}
 		});
 
-		fn.apply(this, args);
+		fn.apply(this, args as any);
 		loopWhile(() => state === State.Pending);
 
 		if (state === State.Rejected) {
-			throw valueOrError;
+			throw resultOrError;
 		} else {
-			return valueOrError as R;
+			return resultOrError as R;
 		}
 	};
 }
@@ -65,25 +73,25 @@ export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
  */
 export function awaitSync<T>(promise: PromiseLike<T> | T) {
 	let state = State.Pending;
-	let valueOrError: unknown;
+	let resultOrError: unknown;
 
 	if (!isThenable(promise)) {
 		return promise;
 	}
 
 	promise.then(res => {
-		valueOrError = res;
+		resultOrError = res;
 		state = State.Fulfilled;
 	}, err => {
-		valueOrError = err;
+		resultOrError = err;
 		state = State.Rejected;
 	});
 
 	loopWhile(() => state === State.Pending);
 
 	if (state === State.Rejected) {
-		throw valueOrError;
+		throw resultOrError;
 	} else {
-		return valueOrError as T;
+		return resultOrError as T;
 	}
 }

@@ -4,5 +4,7 @@ module.exports = {
 		"@kaciras/core",
 		"@kaciras/typescript",
 	],
-	env: { node: true },
+	env: {
+		node: true,
+	},
 };
