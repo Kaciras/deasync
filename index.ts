@@ -66,7 +66,7 @@ export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
 }
 
 /**
- * Similar with keyword `await` but synchronously.
+ * Similar with the keyword `await` but synchronously.
  *
  * @param promise A Promise or any value to wait for
  * @return Returns the fulfilled value of the promise, or the value itself if it's not a Promise.

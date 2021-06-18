@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/Kaciras/deasync/branch/master/graph/badge.svg?token=ST7ROWQH0Z)](https://codecov.io/gh/Kaciras/deasync)
 [![GitHub license](https://img.shields.io/github/license/Kaciras/deasync)](https://github.com/Kaciras/deasync/blob/master/LICENSE)
 
-DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is writen in C++.
+DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is written in C++.
 
 This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code. There are some new features added: TypeScript types, Promise support, and prebuild binaries.
 
@@ -27,17 +27,17 @@ DeAsync supports both alternatives.
 npm install @kaciras/deasync
 ```
 
-Deasync downloads prebuild binary from GitHub releases during installation, if the download fails, try to build locally. You can skip the installation phase by set environment variable `NO_PREBUILD=1`.
+DeAsync downloads prebuild binary from GitHub releases during installation, if the download fails, try to build locally. You can skip the installation phase by set environment variable `NO_PREBUILD=1`.
 
 DeAsync uses node-gyp to compile C++ source code, so to build Deasync you may need the compilers listed in [node-gyp](https://github.com/nodejs/node-gyp).
 
-## Usages
+## Usage
 
 Deasync exports two APIs: `deasync` for callback style function, and `awaitSync` for Promise.
 
 ### `deasync(function)`
 
-Generic wrapper of async function with conventional API signature `function(p1,...pn, (error,result) => {})`. Returns `result` and throws `error` as exception if not null.
+Generic wrapper of async function with conventional API signature `function(...args, (error, result) => {})`. Returns `result` and throws `error` as exception if not null.
 
 Sleep (a wrapper of setTimeout):
 
@@ -57,19 +57,15 @@ console.log("Timestamp after: " + performance.now());
 
 The `awaitSync` causes execution to pause until a Promise is settled (that is, fulfilled or rejected), and to resume execution of after fulfillment. When resumed, the returned value of the `awaitSync` is that of the fulfilled Promise. If the Promise is rejected, the `awaitSync` throws the rejected value.
 
-This function is similar with keyword `await` but synchronously.
+This function is similar with the keyword `await` but synchronously.
 
 ```javascript
 const { awaitSync } = require("@kaciras/deasync");
 const { performance } = require("perf_hooks");
 
-async function sleep(time) {
-	await new Promise(resolve => setTimeout(resolve, time));
-	return "wake up!";
-}
-
 console.log("Timestamp before: " + performance.now());
-console.log(awaitSync(sleep(1000)));
+const promise = new Promise(resolve => setTimeout(resolve, 1000)).then(() => "wake up!")
+console.log(awaitSync(promise));
 console.log("Timestamp after: " + performance.now());
 ```
 
