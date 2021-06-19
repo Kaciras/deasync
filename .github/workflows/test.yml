@@ -1,0 +1,39 @@
+name: Test
+
+on: push
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        node: [14, 16]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - uses: actions/checkout@v2
+
+      - run: npm i -g pnpm
+
+      - run: pnpm install -g node-gyp codecov
+
+      - run: pnpm install
+
+      - name: Build
+        run: node-gyp rebuild
+
+      - name: Test
+        run: pnpm test:coverage
+
+      - name: Upload Coverage
+        run: codecov
