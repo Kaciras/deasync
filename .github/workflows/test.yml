@@ -30,7 +30,7 @@ jobs:
           key: ${{ runner.os }}-node${{ matrix.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Install Node deps
-      - run: |
+        run: |
           npm i -g pnpm
           pnpm i -g node-gyp codecov
           pnpm install
