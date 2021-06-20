@@ -23,13 +23,19 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - run: npm i -g pnpm
+      - name: Cache .pnpm-store
+        uses: actions/cache@v1
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-node${{ matrix.node }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
-      - run: pnpm install -g node-gyp codecov
+      - name: Install Node deps
+      - run: |
+          npm i -g pnpm
+          pnpm i -g node-gyp codecov
+          pnpm install
 
-      - run: pnpm install
-
-      - name: Build
+      - name: Build Addon
         run: node-gyp rebuild
 
       - name: Test
