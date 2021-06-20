@@ -1,7 +1,7 @@
 # DeAsync
 
 [![Npm Version](https://img.shields.io/npm/v/@kaciras/deasync)](https://www.npmjs.com/package/@kaciras/deasync)
-[![Build Status](https://www.travis-ci.com/Kaciras/deasync.svg?branch=master)](https://www.travis-ci.com/Kaciras/deasync)
+[![Test](https://github.com/Kaciras/deasync/actions/workflows/test.yml/badge.svg)](https://github.com/Kaciras/deasync/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/Kaciras/deasync/branch/master/graph/badge.svg?token=ST7ROWQH0Z)](https://codecov.io/gh/Kaciras/deasync)
 [![GitHub license](https://img.shields.io/github/license/Kaciras/deasync)](https://github.com/Kaciras/deasync/blob/master/LICENSE)
 
