@@ -5,7 +5,7 @@ import { awaitSync } from "../index";
 
 it("should just return if argument is not a Promise", () => {
 	const value = new Error();
-	assert(awaitSync(value) === value);
+	assert.strictEqual(awaitSync(value), value);
 });
 
 it("should work with Promise.resolve", () => {
@@ -28,7 +28,9 @@ it("should work with macro task", () => {
 	const sleeping = new Promise(resolve => setTimeout(resolve, 400));
 
 	awaitSync(sleeping);
-	assert(performance.now() - start >= 400);
+
+	const time = performance.now() - start;
+	assert.ok(time >= 400, `expect greater then 400, but was ${time}`);
 });
 
 it("should throw error from macro task", () => {

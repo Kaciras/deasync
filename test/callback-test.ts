@@ -16,10 +16,10 @@ it("should pass arguments correctly", () => {
 	const { self, args } = object.testFn("foo", "bar");
 
 	assert.strictEqual(args.length, 3);
-	assert(self === object);
+	assert.strictEqual(self, object);
 	assert.strictEqual(args[0], "foo");
 	assert.strictEqual(args[1], "bar");
-	assert(typeof args[2] === "function");
+	assert.strictEqual(typeof args[2], "function");
 });
 
 it("should work with sync function", () => {
@@ -39,10 +39,12 @@ it("should throw error from sync function", () => {
 
 it("should work with macro task", () => {
 	const sleep = deasync((timeout, done) => setTimeout(done, timeout));
-
 	const start = performance.now();
+
 	sleep(400);
-	assert(performance.now() - start >= 400);
+
+	const time = performance.now() - start;
+	assert.ok(time >= 400, `expect greater then 400, but was ${time}`);
 });
 
 it("should throw error from macro task", () => {
@@ -56,5 +58,11 @@ it("should throw error from macro task", () => {
 });
 
 it("should work with combined Promise and callback", () => {
-	deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 100))))();
+	const sleep = deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 400))));
+	const start = performance.now();
+
+	sleep(400);
+
+	const time = performance.now() - start;
+	assert.ok(time >= 400, `expect greater then 400, but was ${time}`);
 });
