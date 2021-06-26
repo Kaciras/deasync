@@ -11,3 +11,5 @@
 /temp.js
 /test/*.js
 *.d.ts
+
+!/test/worker.js
