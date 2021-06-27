@@ -11,5 +11,6 @@
 /temp.js
 /test/*.js
 *.d.ts
+*.js.map
 
 !/test/worker.js

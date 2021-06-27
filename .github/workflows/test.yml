@@ -38,8 +38,11 @@ jobs:
       - name: Build Addon
         run: node-gyp rebuild
 
+      # worker_threads needs js output
       - name: Test
-        run: pnpm test:coverage
+        run: |
+          tsc --build
+          pnpm test:coverage
 
       - name: Upload Coverage
         run: codecov
