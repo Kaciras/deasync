@@ -29,8 +29,9 @@
 		"index.d.ts"
 	],
 	"scripts": {
-		"lint": "eslint --fix --ext ts .",
 		"install": "node script/prebuild.js install",
+		"lint": "eslint --fix --ext ts .",
+		"compile:ts": "tsc",
 		"test": "mocha",
 		"test:coverage": "nyc mocha"
 	},

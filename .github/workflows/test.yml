@@ -41,8 +41,8 @@ jobs:
       # worker_threads needs js output
       - name: Test
         run: |
-          tsc --build
-          pnpm test:coverage
+          pnpm run compile:ts
+          pnpm run test:coverage
 
       - name: Upload Coverage
         run: codecov
