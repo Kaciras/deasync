@@ -10,6 +10,7 @@
 		"sourceMap": true,
 		"declaration": true,
 		"strict": true,
+		"useUnknownInCatchVariables": false,
 		"skipLibCheck": true
 	}
 }
