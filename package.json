@@ -36,19 +36,19 @@
 		"test:coverage": "nyc mocha"
 	},
 	"dependencies": {
-		"follow-redirects": "^1.14.2",
+		"follow-redirects": "^1.14.4",
 		"tar-fs": "^2.1.1"
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "^1.0.1",
-		"@kaciras/eslint-config-core": "^1.6.0",
-		"@kaciras/eslint-config-typescript": "^1.6.0",
+		"@kaciras/eslint-config-core": "^1.7.0",
+		"@kaciras/eslint-config-typescript": "^1.7.0",
 		"@types/mocha": "^9.0.0",
-		"@types/node": "^16.7.10",
+		"@types/node": "^16.9.1",
 		"eslint": "^7.32.0",
 		"mocha": "^9.1.1",
 		"nyc": "^15.1.0",
 		"ts-node": "^10.2.1",
-		"typescript": "^4.4.2"
+		"typescript": "^4.4.3"
 	}
 }
