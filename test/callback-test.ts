@@ -41,7 +41,9 @@ it("should work with macro task", () => {
 	const sleep = deasync((timeout, done) => setTimeout(done, timeout));
 	const start = performance.now();
 
-	sleep(400);
+	// setTimeout() may triggers earlier than expected, so we need make the timeout a little longer.
+	// More detail: https://stackoverflow.com/a/49879089
+	sleep(401);
 
 	const time = performance.now() - start;
 	assert.ok(time >= 400, `expect greater then 400, but was ${time}`);
@@ -61,7 +63,7 @@ it("should work with combined Promise and callback", () => {
 	const sleep = deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 400))));
 	const start = performance.now();
 
-	sleep(400);
+	sleep(401);
 
 	const time = performance.now() - start;
 	assert.ok(time >= 400, `expect greater then 400, but was ${time}`);

@@ -25,7 +25,7 @@ it("should throw on Promise.reject", () => {
 
 it("should work with macro task", () => {
 	const start = performance.now();
-	const sleeping = new Promise<void>(resolve => setTimeout(resolve, 400));
+	const sleeping = new Promise<void>(resolve => setTimeout(resolve, 401));
 
 	awaitSync(sleeping);
 
