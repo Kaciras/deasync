@@ -25,12 +25,12 @@ it("should throw on Promise.reject", () => {
 
 it("should work with macro task", () => {
 	const start = performance.now();
-	const sleeping = new Promise<void>(resolve => setTimeout(resolve, 401));
+	const sleeping = new Promise<void>(resolve => setTimeout(resolve, 101));
 
 	awaitSync(sleeping);
 
 	const time = performance.now() - start;
-	assert.ok(time >= 400, `expect greater then 400, but was ${time}`);
+	assert.ok(time >= 100, `expect greater then 100, but was ${time}`);
 });
 
 it("should throw error from macro task", () => {
