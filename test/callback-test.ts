@@ -60,10 +60,10 @@ it("should throw error from macro task", () => {
 });
 
 it("should work with combined Promise and callback", () => {
-	const sleep = deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 100))));
+	const sleep = deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 101))));
 	const start = performance.now();
 
-	sleep(101);
+	sleep();
 
 	const time = performance.now() - start;
 	assert.ok(time >= 100, `expect greater then 100, but was ${time}`);
