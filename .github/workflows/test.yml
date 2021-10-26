@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
-        node: [14, 16]
+        node: [14, 16, 17]
 
     runs-on: ${{ matrix.os }}
 
@@ -15,11 +15,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
-          check-latest: true
 
       - uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.10
 
       - uses: actions/checkout@v2
 
@@ -33,7 +32,10 @@ jobs:
         run: |
           npm i -g pnpm
           pnpm i -g node-gyp
-          pnpm install
+
+      - run: pnpm install
+      env:
+        NO_PREBUILD: true
 
       - name: Build Addon
         run: node-gyp rebuild

@@ -6,6 +6,8 @@ const { https } = require("follow-redirects");
 const tar = require("tar-fs");
 const packageJson = require("../package.json");
 
+const binary = "build/Release/binding.node";
+
 process.chdir(join(__dirname, ".."));
 
 /**
@@ -15,10 +17,9 @@ function getPackageName() {
 	const name = packageJson.name.split("/").pop();
 	const { version } = packageJson;
 	const runtime = "node";
-	const abi = "NAPIv3";
 	const { platform, arch } = process;
 
-	return `${name}-v${version}-${runtime}-${abi}-${platform}-${arch}.tar.br`;
+	return `${name}-v${version}-${runtime}-${platform}-${arch}.tar.br`;
 }
 
 function getGithubRelease() {
@@ -41,7 +42,7 @@ function pack() {
 	fs.mkdirSync("prebuilds");
 
 	const pack = tar.pack(".", {
-		entries: ["build/Release/binding.node"],
+		entries: [binary],
 	});
 
 	const file = `prebuilds/${getPackageName()}`;
@@ -70,8 +71,7 @@ function checkRange(request, response) {
 }
 
 /**
- * Download prebuilt binary from GitHub Release.
- * If download failed, fallback to build locally.
+ * Download prebuilt binary from GitHub Release, If download failed, fallback to build locally.
  */
 function download() {
 	const filename = getPackageName();
@@ -135,11 +135,11 @@ function handleInstallError(error) {
 	}
 }
 
-const { NO_PREBUILD, CI } = process.env;
+const { NO_PREBUILD } = process.env;
 const [, , verb] = process.argv;
 
 if (verb === "install") {
-	if (!NO_PREBUILD && !CI) {
+	if (!NO_PREBUILD) {
 		download();
 	}
 } else if (verb === "pack") {
