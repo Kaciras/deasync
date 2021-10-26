@@ -34,8 +34,8 @@ jobs:
           pnpm i -g node-gyp
 
       - run: pnpm install
-      env:
-        NO_PREBUILD: true
+        env:
+          NO_PREBUILD: true
 
       - name: Build Addon
         run: node-gyp rebuild
