@@ -1,5 +1,8 @@
 {
 	"files": ["index.ts"],
+	"ts-node": {
+		"transpileOnly": true
+	},
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "CommonJS",
