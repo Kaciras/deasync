@@ -32,7 +32,7 @@
 		"install": "node script/prebuild.js install",
 		"lint": "eslint --fix --ext ts .",
 		"compile:ts": "tsc",
-		"test": "mocha",
+		"test": "mocha && tsc --project tsconfig-test.json",
 		"test:coverage": "nyc mocha"
 	},
 	"dependencies": {
@@ -49,6 +49,6 @@
 		"mocha": "^9.1.3",
 		"nyc": "^15.1.0",
 		"ts-node": "^10.4.0",
-		"typescript": "^4.4.4"
+		"typescript": "^4.5.2"
 	}
 }

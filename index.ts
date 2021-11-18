@@ -71,12 +71,12 @@ export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
  * @param promise A Promise or any value to wait for
  * @return Returns the fulfilled value of the promise, or the value itself if it's not a Promise.
  */
-export function awaitSync<T>(promise: PromiseLike<T> | T) {
+export function awaitSync<T>(promise: T) {
 	let state = State.Pending;
 	let resultOrError: unknown;
 
 	if (!isThenable(promise)) {
-		return promise;
+		return promise as Awaited<T>;
 	}
 
 	promise.then(res => {
@@ -92,6 +92,6 @@ export function awaitSync<T>(promise: PromiseLike<T> | T) {
 	if (state === State.Rejected) {
 		throw resultOrError;
 	} else {
-		return resultOrError as T;
+		return resultOrError as Awaited<T>;
 	}
 }
