@@ -36,7 +36,7 @@
 		"test:coverage": "nyc mocha"
 	},
 	"dependencies": {
-		"follow-redirects": "^1.14.6",
+		"follow-redirects": "^1.14.7",
 		"tar-fs": "^2.1.1"
 	},
 	"devDependencies": {
