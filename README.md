@@ -14,7 +14,7 @@ This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and 
 
 Suppose you maintain a library that exposes a function `getData`. Your users call it to get actual data:   
 `const myData = getData()`  
-Under the hood data is saved in a file so you implemented `getData` using Node.js built-in `fs.readFileSync`. It's obvious both `getData` and `fs.readFileSync` are sync functions. One day you were told to switch the underlying data source to a repo such as MongoDB which can only be accessed asynchronously. You were also told to avoid pissing off your users, `getData` API cannot be changed to return merely a promise or demand a callback parameter. How do you meet both requirements?
+Under the hood data is saved in a file so you implemented `getData` using Node.js built-in `fs.readFileSync`. It's obvious both `getData` and `fs.readFileSync` are sync functions. One day you were told to switch the underlying data source to a repo such as MongoDB which can only be accessed asynchronously. You were also told for backward compatibility, `getData` API cannot be changed to return merely a promise or demand a callback parameter. How do you meet both requirements?
 
 You may tempted to use [node-fibers](https://github.com/laverdet/node-fibers) or a module derived from it, but node fibers can only wrap async function call into a sync function inside a fiber. In the case above you cannot assume all  callers are inside fibers. On the other hand, if you start a fiber in `getData` then `getData` itself will still return immediately without waiting for the async call result. For similar reason ES6 generators introduced in Node v0.11 won't work either. 
 
@@ -72,4 +72,11 @@ console.log("Timestamp after: " + performance.now());
 
 ## Recommendation
 
-Unlike other (a)sync js packages that mostly have only syntactic impact, DeAsync also changes code execution sequence. As such, it is intended to solve niche cases like the above one. If all you are facing is syntatic problem such as callback hell, using a less drastic package implemented in pure js is recommended.
+Unlike other (a)sync js packages that mostly have only syntactic impact, DeAsync also changes code execution sequence. As such, it is intended to solve niche cases like the above one. If all you are facing is syntactic problem such as callback hell, using a less drastic package implemented in pure js is recommended.
+
+## Support
+Pull requests and issue reporting are welcome. For issues to be considered by maintainer
+1. they must be reproducible
+2. there must be evidence the issue is related to DeAsync
+
+To that end, the issue should contain platform information, error message relevant to DeAsync, and preferably code snippet. If code snippet is supplied, it must be self-contained, i.e. independent from your runtime environment or other modules not explicitly specified via `require` in the code snippet.
