@@ -1,6 +1,6 @@
 {
 	"name": "@kaciras/deasync",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Turns async code into sync via JavaScript wrapper of Node event loop, support both callback and promise",
 	"author": "Kaciras <Kaciras@protonmail.com>",
 	"license": "MIT",
