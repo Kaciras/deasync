@@ -10,7 +10,7 @@ specifiers:
   follow-redirects: ^1.14.9
   mocha: ^9.2.1
   tar-fs: ^2.1.1
-  ts-node: ^10.6.0
+  ts-node: ^10.7.0
   typescript: ^4.6.2
 
 dependencies:
@@ -25,7 +25,7 @@ devDependencies:
   c8: 7.11.0
   eslint: 8.10.0
   mocha: 9.2.1
-  ts-node: 10.6.0_e79e62fe450383fd2d418267dc75e645
+  ts-node: 10.7.0_e79e62fe450383fd2d418267dc75e645
   typescript: 4.6.2
 
 packages:
@@ -1387,8 +1387,8 @@ packages:
       is-number: 7.0.0
     dev: true
 
-  /ts-node/10.6.0_e79e62fe450383fd2d418267dc75e645:
-    resolution: {integrity: sha512-CJen6+dfOXolxudBQXnVjRVvYTmTWbyz7cn+xq2XTsvnaXbHqr4gXSCNbS2Jj8yTZMuGwUoBESLaOkLascVVvg==}
+  /ts-node/10.7.0_e79e62fe450383fd2d418267dc75e645:
+    resolution: {integrity: sha512-TbIGS4xgJoX2i3do417KSaep1uRAW/Lu+WAL2doDHC0D6ummjirVOXU5/7aiZotbQ5p1Zp9tP7U6cYhA0O7M8A==}
     hasBin: true
     peerDependencies:
       '@swc/core': '>=1.2.50'
