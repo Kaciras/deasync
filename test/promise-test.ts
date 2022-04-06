@@ -8,6 +8,10 @@ it("should just return if argument is not a Promise", () => {
 	assert.strictEqual(awaitSync(value), value);
 });
 
+it("should just return primitive value", () => {
+	assert.strictEqual(awaitSync(11), 11);
+});
+
 it("should work with Promise.resolve", () => {
 	const result = awaitSync(Promise.resolve(114514));
 	assert.strictEqual(result, 114514);
