@@ -32,8 +32,7 @@ jobs:
 
       - name: Install Node deps
         run: |
-          npm i -g pnpm
-          pnpm i -g node-gyp
+          npm i -g pnpm node-gyp
 
       - run: pnpm install
         env:
