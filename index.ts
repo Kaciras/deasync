@@ -23,11 +23,10 @@ function isThenable<T>(value: any): value is PromiseLike<T> {
 type Fn<T, A extends any[], R> = (this: T, ...args: A) => R;
 
 // Can't use enum as async-to-sync breaks the control flow analyzing.
-const State = {
-	Pending: 0,
-	Fulfilled: 1,
-	Rejected: 2,
-};
+
+const Pending = 0;
+const Fulfilled = 1;
+const Rejected = 2;
 
 /**
  * Generic wrapper of async function with conventional API signature
@@ -41,23 +40,23 @@ const State = {
 export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
 
 	return function (this: T, ...args: any[]) {
-		let state = State.Pending;
+		let state = Pending;
 		let resultOrError: unknown;
 
 		args.push((err: unknown, res: R) => {
 			if (err) {
 				resultOrError = err;
-				state = State.Rejected;
+				state = Rejected;
 			} else {
 				resultOrError = res;
-				state = State.Fulfilled;
+				state = Fulfilled;
 			}
 		});
 
 		fn.apply(this, args as any);
-		loopWhile(() => state === State.Pending);
+		loopWhile(() => state === Pending);
 
-		if (state === State.Rejected) {
+		if (state === Rejected) {
 			throw resultOrError;
 		} else {
 			return resultOrError as R;
@@ -72,7 +71,7 @@ export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
  * @return Returns the fulfilled value of the promise, or the value itself if it's not a Promise.
  */
 export function awaitSync<T>(promise: T) {
-	let state = State.Pending;
+	let state = Pending;
 	let resultOrError: unknown;
 
 	if (!isThenable(promise)) {
@@ -81,15 +80,15 @@ export function awaitSync<T>(promise: T) {
 
 	promise.then(res => {
 		resultOrError = res;
-		state = State.Fulfilled;
+		state = Fulfilled;
 	}, err => {
 		resultOrError = err;
-		state = State.Rejected;
+		state = Rejected;
 	});
 
-	loopWhile(() => state === State.Pending);
+	loopWhile(() => state === Pending);
 
-	if (state === State.Rejected) {
+	if (state === Rejected) {
 		throw resultOrError;
 	} else {
 		return resultOrError as Awaited<T>;
