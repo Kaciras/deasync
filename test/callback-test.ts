@@ -41,7 +41,7 @@ it("should work with macro task", () => {
 	const sleep = deasync((timeout, done) => setTimeout(done, timeout));
 	const start = performance.now();
 
-	// setTimeout() may triggers earlier than expected, so we need make the timeout a little longer.
+	// setTimeout() may trigger earlier than expected, so we make the timeout a little longer.
 	// More detail: https://stackoverflow.com/a/49879089
 	sleep(101);
 

@@ -8,7 +8,7 @@
 
 DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is written in C++.
 
-This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code. There are some new features added: TypeScript types, Promise support, and prebuild binaries.
+This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code. There are some new features added: Types, Promise support, and prebuild binaries.
 
 ## Motivation
 
@@ -34,7 +34,7 @@ DeAsync uses node-gyp to compile C++ source code, so to build Deasync you may ne
 
 ## Usage
 
-Deasync exports two APIs: `deasync` for callback style function, and `awaitSync` for Promise.
+DeAsync exports only two APIs: `deasync` for callback-style functions, and `awaitSync` for Promises.
 
 ### `deasync(function)`
 
@@ -56,16 +56,15 @@ console.log("Timestamp after: " + performance.now());
 
 ### `awaitSync(promise)`
 
-The `awaitSync` causes execution to pause until a Promise is settled (that is, fulfilled or rejected), and to resume execution of after fulfillment. When resumed, the returned value of the `awaitSync` is that of the fulfilled Promise. If the Promise is rejected, the `awaitSync` throws the rejected value.
-
-This function is similar with the keyword `await` but synchronously.
+Similar with the keyword `await` but synchronously.
 
 ```javascript
 const { awaitSync } = require("@kaciras/deasync");
 const { performance } = require("perf_hooks");
 
-console.log("Timestamp before: " + performance.now());
 const promise = new Promise(resolve => setTimeout(resolve, 1000)).then(() => "wake up!")
+
+console.log("Timestamp before: " + performance.now());
 console.log(awaitSync(promise));
 console.log("Timestamp after: " + performance.now());
 ```
@@ -73,10 +72,3 @@ console.log("Timestamp after: " + performance.now());
 ## Recommendation
 
 Unlike other (a)sync js packages that mostly have only syntactic impact, DeAsync also changes code execution sequence. As such, it is intended to solve niche cases like the above one. If all you are facing is syntactic problem such as callback hell, using a less drastic package implemented in pure js is recommended.
-
-## Support
-Pull requests and issue reporting are welcome. For issues to be considered by maintainer
-1. they must be reproducible
-2. there must be evidence the issue is related to DeAsync
-
-To that end, the issue should contain platform information, error message relevant to DeAsync, and preferably code snippet. If code snippet is supplied, it must be self-contained, i.e. independent from your runtime environment or other modules not explicitly specified via `require` in the code snippet.
