@@ -17,13 +17,15 @@ function isThenable<T>(value: any): value is PromiseLike<T> {
 	return typeof value.then === "function";
 }
 
+type Callback<R> = (error: unknown, result: R) => void;
+type CallbackArgs<A extends any[], R> = [...args: A, cb: Callback<R>];
+
 /**
- * A generic replacement of the `Function` type.
+ * A generic replacement of callback-style function type.
  */
-type Fn<T, A extends any[], R> = (this: T, ...args: A) => R;
+type Fn<T, A extends any[], R> = (this: T, ...args: CallbackArgs<A, R>) => void;
 
 // Can't use enum as async-to-sync breaks the control flow analyzing.
-
 const Pending = 0;
 const Fulfilled = 1;
 const Rejected = 2;
@@ -37,9 +39,9 @@ const Rejected = 2;
  * @param fn the original callback style function
  * @return the wrapped function
  */
-export function deasync<T, R = any>(fn: Fn<T, any[], void>) {
+export function deasync<T, A extends any[], R>(fn: Fn<T, A, R>) {
 
-	return function (this: T, ...args: any[]) {
+	return function (this: T, ...args: A) {
 		let state = Pending;
 		let resultOrError: unknown;
 
