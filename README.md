@@ -8,7 +8,7 @@
 
 DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is written in C++.
 
-This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code. There are some new features added: Types, Promise support, and prebuild binaries.
+This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, adding some new features:: types, Promise support, and prebuild binaries.
 
 ## Motivation
 
@@ -28,7 +28,7 @@ DeAsync supports both alternatives.
 npm install @kaciras/deasync
 ```
 
-DeAsync downloads prebuild binary from GitHub releases during installation, if the download fails, try to build locally. You can skip the installation phase by set environment variable `NO_PREBUILD=1`.
+DeAsync downloads prebuild binary from GitHub releases during installation, if the download fails, try to build locally. You can skip the install phase by set environment variable `NO_PREBUILD=1`.
 
 DeAsync uses node-gyp to compile C++ source code, so to build Deasync you may need the compilers listed in [node-gyp](https://github.com/nodejs/node-gyp).
 

@@ -12,7 +12,7 @@ it("should pass arguments correctly", () => {
 		callback(null, { self: this, args });
 	}
 
-	const object = { testFn: deasync(testFn) };
+	const object = { testFn: deasync(testFn) as any };
 	const { self, args } = object.testFn("foo", "bar");
 
 	assert.strictEqual(args.length, 3);
@@ -23,12 +23,12 @@ it("should pass arguments correctly", () => {
 });
 
 it("should work with sync function", () => {
-	const fn = deasync(callback => callback(null, 114514));
+	const fn = deasync<void, [], number>(callback => callback(null, 114514));
 	assert.strictEqual(fn(), 114514);
 });
 
 it("should throw error from sync function", () => {
-	const fn = deasync(callback => callback(new Error("foobar")));
+	const fn = deasync<void, [], void>(callback => callback(new Error("foobar")));
 	try {
 		fn();
 		assert.fail("Shouldn't run here");
@@ -38,7 +38,7 @@ it("should throw error from sync function", () => {
 });
 
 it("should work with macro task", () => {
-	const sleep = deasync((timeout, done) => setTimeout(done, timeout));
+	const sleep = deasync((timeout: number, done: any) => setTimeout(done, timeout));
 	const start = performance.now();
 
 	// setTimeout() may trigger earlier than expected, so we make the timeout a little longer.
@@ -60,11 +60,12 @@ it("should throw error from macro task", () => {
 });
 
 it("should work with combined Promise and callback", () => {
-	const sleep = deasync(callbackify(() => new Promise(resolve => setTimeout(resolve, 101))));
+	const sleep = () => new Promise<void>(resolve => setTimeout(resolve, 101));
+	const sleepSync = deasync<void, [], void>(callbackify(sleep));
+
 	const start = performance.now();
-
-	sleep();
-
+	sleepSync();
 	const time = performance.now() - start;
+
 	assert.ok(time >= 100, `expect greater then 100, but was ${time}`);
 });
