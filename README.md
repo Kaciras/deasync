@@ -10,8 +10,9 @@ DeAsync turns async code into sync, implemented with a blocking mechanism by cal
 
 This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, adding some new features:: types, Promise support, and prebuild binaries.
 
-> **Note**
-> Dut to [uv_run() is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), `awaitSync` and deasynced functions only work on top level, calling them from a callback will cause a deadlock.
+> **Warning**
+> 
+> Dut to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), `awaitSync` and deasynced functions only work on top level, calling them from a callback will cause a deadlock.
 
 ## Installation
 
@@ -19,7 +20,7 @@ This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and 
 npm install @kaciras/deasync
 ```
 
-DeAsync downloads prebuild binary from GitHub releases during installation, if the download fails, try to build locally. You can skip the install phase by set environment variable `NO_PREBUILD=1`.
+DeAsync downloads prebuild binary from GitHub releases during installation, if download fails, try to build locally. You can skip the install phase by setting the environment variable `NO_PREBUILD=1`.
 
 DeAsync uses node-gyp to compile C++ source code, so to build Deasync you may need the compilers listed in [node-gyp](https://github.com/nodejs/node-gyp).
 
