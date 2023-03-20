@@ -12,7 +12,7 @@ This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and 
 
 > **Warning**
 > 
-> Dut to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), `awaitSync` and deasynced functions only work on top level, calling them from a callback will cause a deadlock.
+> Due to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), `awaitSync` and deasynced functions only work on top level, calling them from a callback will cause a deadlock.
 
 ## Installation
 
