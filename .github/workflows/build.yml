@@ -44,9 +44,7 @@ jobs:
       - name: Package
         run: node script/prebuild.js pack
 
-      - name: Upload prebuild binary
+      - name: Upload prebuilt binary
         uses: softprops/action-gh-release@v1
         with:
           files: prebuilds/*
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
