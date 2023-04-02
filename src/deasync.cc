@@ -6,7 +6,7 @@
 napi_value Run(napi_env env, napi_callback_info info) {
 	uv_loop_s* loop;
 	napi_get_uv_event_loop(env, &loop);
-	uv_run(loop, UV_RUN_ONCE);
+	uv_run(loop, UV_RUN_NOWAIT);
 	return nullptr;
 }
 
