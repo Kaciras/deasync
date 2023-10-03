@@ -8,7 +8,7 @@
 
 DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is written in C++.
 
-This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, adding some new features:: types, Promise support, and prebuild binaries.
+This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, adding some new features: types, Promise support, and prebuild binaries.
 
 > **Warning**
 > 
@@ -37,8 +37,8 @@ Sleep (a wrapper of setTimeout):
 ```javascript
 const { deasync } = require("@kaciras/deasync");
 
-const sleep = deasync((timeout, done) => {
-	setTimeout(() => done(null, "wake up!"), timeout);
+const sleep = deasync((timeout, callback) => {
+	setTimeout(() => callback(null, "wake up!"), timeout);
 });
 
 console.log("Timestamp before: " + performance.now());
