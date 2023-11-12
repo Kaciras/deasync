@@ -42,10 +42,10 @@
 	"devDependencies": {
 		"@kaciras/eslint-config-core": "^2.6.1",
 		"@kaciras/eslint-config-typescript": "^2.6.2",
-		"@types/mocha": "^10.0.3",
-		"@types/node": "^20.8.7",
+		"@types/mocha": "^10.0.4",
+		"@types/node": "^20.9.0",
 		"c8": "^8.0.1",
-		"eslint": "^8.52.0",
+		"eslint": "^8.53.0",
 		"mocha": "^10.2.0",
 		"ts-node": "^10.9.1",
 		"typescript": "^5.2.2"
