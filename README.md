@@ -10,7 +10,7 @@ DeAsync turns async code into sync, implemented with a blocking mechanism by cal
 
 This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, adding some new features: types, Promise support, and prebuild binaries.
 
-> **Warning**
+> [!WARNING]
 > 
 > Due to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), `awaitSync` and deasynced functions only work on top level, calling them from a callback will cause a deadlock.
 
