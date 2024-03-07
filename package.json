@@ -40,14 +40,14 @@
 		"tar-fs": "^3.0.5"
 	},
 	"devDependencies": {
-		"@kaciras/eslint-config-core": "^2.6.3",
-		"@kaciras/eslint-config-typescript": "^2.6.3",
+		"@kaciras/eslint-config-core": "^2.6.4",
+		"@kaciras/eslint-config-typescript": "^2.6.4",
 		"@types/mocha": "^10.0.6",
-		"@types/node": "^20.11.17",
+		"@types/node": "^20.11.25",
 		"c8": "^9.1.0",
-		"eslint": "^8.56.0",
+		"eslint": "^8.57.0",
 		"mocha": "^10.3.0",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.3.3"
+		"typescript": "^5.4.2"
 	}
 }
