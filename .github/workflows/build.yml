@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v3
         with:
           version: latest
 
@@ -39,6 +39,6 @@ jobs:
         run: node script/prebuild.js pack
 
       - name: Upload prebuilt binary
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: prebuilds/*
