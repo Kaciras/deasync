@@ -14,7 +14,7 @@ function loopWhile(pred: () => boolean) {
  * @see https://promisesaplus.com/
  */
 function isThenable<T>(value: any): value is PromiseLike<T> {
-	return typeof value.then === "function";
+	return typeof value?.then === "function";
 }
 
 type Callback<R> = (error: unknown, result: R) => void;

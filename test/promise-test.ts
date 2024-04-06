@@ -12,6 +12,10 @@ it("should just return primitive value", () => {
 	assert.strictEqual(awaitSync(11), 11);
 });
 
+it("should allow undefined value", () => {
+	assert.strictEqual(awaitSync(undefined), undefined);
+});
+
 it("should work with Promise.resolve", () => {
 	const result = awaitSync(Promise.resolve(114514));
 	assert.strictEqual(result, 114514);
