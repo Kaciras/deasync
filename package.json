@@ -2,7 +2,7 @@
 	"name": "@kaciras/deasync",
 	"version": "1.0.4",
 	"description": "Turns async code into sync via JavaScript wrapper of Node event loop, support both callback and promise",
-	"author": "Kaciras <Kaciras@protonmail.com>",
+	"author": "Kaciras <Kaciras@outlook.com>",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -30,7 +30,7 @@
 	],
 	"scripts": {
 		"install": "node script/prebuild.js install",
-		"lint": "eslint --fix --ext ts .",
+		"lint": "eslint --fix",
 		"compile:ts": "tsc",
 		"test": "mocha && tsc --project tsconfig-test.json",
 		"test:coverage": "c8 --reporter=lcov mocha"
@@ -40,12 +40,12 @@
 		"tar-fs": "^3.0.5"
 	},
 	"devDependencies": {
-		"@kaciras/eslint-config-core": "^2.6.4",
-		"@kaciras/eslint-config-typescript": "^2.6.4",
+		"@kaciras/eslint-config-core": "^3.0.1",
+		"@kaciras/eslint-config-typescript": "^3.0.1",
 		"@types/mocha": "^10.0.6",
 		"@types/node": "^20.12.7",
 		"c8": "^9.1.0",
-		"eslint": "^8.57.0",
+		"eslint": "^9.1.1",
 		"mocha": "^10.4.0",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.4.5"

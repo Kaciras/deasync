@@ -6,7 +6,6 @@ declare function expectAssignable<T>(_: T): void;
 
 // Test types for returned function of deasync().
 {
-	// eslint-disable-next-line no-inner-declarations
 	function stub(a: string, b: number, c: (err: Error, info: boolean) => void) {}
 
 	const wrapped = deasync(stub);
