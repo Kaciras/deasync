@@ -1,6 +1,5 @@
 import * as assert from "assert";
 import { readFile } from "fs";
-import { performance } from "perf_hooks";
 import { callbackify } from "util";
 import { deasync } from "../index";
 

@@ -52,7 +52,6 @@ Similar with the keyword `await` but synchronously.
 
 ```javascript
 const { awaitSync } = require("@kaciras/deasync");
-const { performance } = require("perf_hooks");
 
 const promise = new Promise(resolve => setTimeout(resolve, 1000)).then(() => "wake up!")
 
