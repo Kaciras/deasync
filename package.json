@@ -43,9 +43,9 @@
 		"@kaciras/eslint-config-core": "^3.2.0",
 		"@kaciras/eslint-config-typescript": "^3.2.0",
 		"@types/mocha": "^10.0.7",
-		"@types/node": "^22.2.0",
+		"@types/node": "^22.5.0",
 		"c8": "^10.1.2",
-		"eslint": "^9.9.0",
+		"eslint": "^9.9.1",
 		"mocha": "^10.7.3",
 		"ts-directly": "^2.1.0",
 		"typescript": "^5.5.4"
