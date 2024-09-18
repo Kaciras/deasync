@@ -22,11 +22,11 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(eslint@9.10.0)(typescript@5.6.2)
       '@types/mocha':
-        specifier: ^10.0.7
-        version: 10.0.7
+        specifier: ^10.0.8
+        version: 10.0.8
       '@types/node':
-        specifier: ^22.5.4
-        version: 22.5.4
+        specifier: ^22.5.5
+        version: 22.5.5
       c8:
         specifier: ^10.1.2
         version: 10.1.2
@@ -37,8 +37,8 @@ importers:
         specifier: ^10.7.3
         version: 10.7.3
       ts-directly:
-        specifier: ^2.1.1
-        version: 2.1.1(typescript@5.6.2)
+        specifier: ^2.1.2
+        version: 2.1.2(typescript@5.6.2)
       typescript:
         specifier: ^5.6.2
         version: 5.6.2
@@ -150,11 +150,11 @@ packages:
   '@types/istanbul-lib-coverage@2.0.6':
     resolution: {integrity: sha512-2QF/t/auWm0lsy8XtKVPG19v3sSOQlJe/YHZgfjb/KBBHOGSV+J2q/S671rcq9uTBrLAXmZpqJiaQbMT+zNU1w==}
 
-  '@types/mocha@10.0.7':
-    resolution: {integrity: sha512-GN8yJ1mNTcFcah/wKEFIJckJx9iJLoMSzWcfRRuxz/Jk+U6KQNnml+etbtxFK8lPjzOw3zp4Ha/kjSst9fsHYw==}
+  '@types/mocha@10.0.8':
+    resolution: {integrity: sha512-HfMcUmy9hTMJh66VNcmeC9iVErIZJli2bszuXc6julh5YGuRb/W5OnkHjwLNYdFlMis0sY3If5SEAp+PktdJjw==}
 
-  '@types/node@22.5.4':
-    resolution: {integrity: sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==}
+  '@types/node@22.5.5':
+    resolution: {integrity: sha512-Xjs4y5UPO/CLdzpgR6GirZJx36yScjh73+2NlLlkFRSoQN8B0DpfXPdZGnvVmLRLOsqDpOfTNv7D9trgGhmOIA==}
 
   '@typescript-eslint/eslint-plugin@8.5.0':
     resolution: {integrity: sha512-lHS5hvz33iUFQKuPFGheAB84LwcJ60G8vKnEhnfcK1l8kGVLro2SFYW6K0/tj8FUhRJ0VHyg1oAfg50QGbPPHw==}
@@ -827,8 +827,8 @@ packages:
     peerDependencies:
       typescript: '>=4.2.0'
 
-  ts-directly@2.1.1:
-    resolution: {integrity: sha512-31AyifErLDilV872I/tfXUl3FkBEgRnNZOaiaihudvYhmPUxoiWgxjQwVATX8ZZpeM59pYcXkkE2w8PqIX9zJw==}
+  ts-directly@2.1.2:
+    resolution: {integrity: sha512-Onklx+5ZyaG4qUKZURMhhQkd71Gh1/Lb1pFx21Ovd6srutL6cvsLH9JUgQD9R6gtHM7h5e46hPyByUT0MtzlLg==}
     engines: {node: '>=18.19'}
     peerDependencies:
       '@swc/core': '>=1'
@@ -1054,9 +1054,9 @@ snapshots:
 
   '@types/istanbul-lib-coverage@2.0.6': {}
 
-  '@types/mocha@10.0.7': {}
+  '@types/mocha@10.0.8': {}
 
-  '@types/node@22.5.4':
+  '@types/node@22.5.5':
     dependencies:
       undici-types: 6.19.8
 
@@ -1764,7 +1764,7 @@ snapshots:
     dependencies:
       typescript: 5.6.2
 
-  ts-directly@2.1.1(typescript@5.6.2):
+  ts-directly@2.1.2(typescript@5.6.2):
     dependencies:
       tsconfck: 3.1.3(typescript@5.6.2)
     optionalDependencies:
