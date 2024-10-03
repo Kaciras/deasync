@@ -10,8 +10,9 @@ it("should run loop once", async () => {
 
 	// Sleep 1ms synchronously.
 	const start = performance.now();
-	while (performance.now() - start > 2) {}
+	while (performance.now() - start > 5) {}
 
+	runLoopOnce();
 	runLoopOnce();
 
 	assert.ok(micro, "Micro task has not run");
