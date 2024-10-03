@@ -9,11 +9,13 @@
 
 DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is written in C++.
 
-This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, adding some new features: types, Promise support, and prebuild binaries.
+This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, **adding some new features: types, Promise support, and prebuild binaries.**
+
+The benefit of this package over [synckit](https://github.com/un-ts/synckit), [await-sync](https://github.com/jimmywarting/await-sync) and others libs is that this runs your code in the current context, so parameters and the return value of your function are no need to be serializable, you are free to use `Symbol`, functions, and objects with prototypes.
 
 > [!WARNING]
 > 
-> Due to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), `awaitSync` and deasynced functions only work on top level, calling them from a callback will cause a deadlock.
+> Due to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), `awaitSync` and deasynced functions only work on top level, calling them from async callback will cause a deadlock.
 
 ## Installation
 
@@ -63,4 +65,4 @@ console.log("Timestamp after: " + performance.now());
 
 ## Recommendation
 
-Unlike other (a)sync js packages that mostly have only syntactic impact, DeAsync also changes code execution sequence. As such, it is intended to solve niche cases like the above one. If all you are facing is syntactic problem such as callback hell, using a less drastic package implemented in pure js is recommended.
+DeAsync changes code execution sequence and the task scheduling, which typically degrades performance. The primary use case for DeAsync is compatibility with legacy code that does not support asynchronous. If all you are facing is syntactic problem such as callback hell, using a less drastic package implemented in pure js is recommended.
