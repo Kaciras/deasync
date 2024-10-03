@@ -6,13 +6,8 @@ it("should run loop once", async () => {
 	let macro = false;
 
 	Promise.resolve().then(() => micro = true);
-	setTimeout(() => macro = true, 1);
+	setImmediate(() => macro = true);
 
-	// Sleep 1ms synchronously.
-	const start = performance.now();
-	while (performance.now() - start > 5) {}
-
-	runLoopOnce();
 	runLoopOnce();
 
 	assert.ok(micro, "Micro task has not run");
