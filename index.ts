@@ -15,6 +15,11 @@ export function loopWhile(pred: () => boolean) {
 	}
 }
 
+export function runLoopOnce() {
+	process._tickCallback();
+	uvRun(); // Macro task should be run after microtasks.
+}
+
 /**
  * Determine whether the value is a Promise.
  *
