@@ -1,10 +1,17 @@
 /// <reference types="./missing-types" />
-import { run } from "./build/Release/binding.node";
+import { uvRun } from "./build/Release/binding.node";
 
-function loopWhile(pred: () => boolean) {
+export { uvRun };
+
+/**
+ * Run tasks in the event loop until the `pred` returns true.
+ *
+ * @param pred A function that returns boolean loop condition.
+ */
+export function loopWhile(pred: () => boolean) {
 	while (pred()) {
 		process._tickCallback();
-		if (pred()) run();
+		if (pred()) uvRun();
 	}
 }
 

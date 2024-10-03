@@ -1,6 +1,6 @@
 declare module "*.node" {
 
-	export function run(): void;
+	export function uvRun(): void;
 }
 
 declare namespace NodeJS {
