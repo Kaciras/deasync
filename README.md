@@ -77,7 +77,10 @@ console.log(`Called is ${called}`); // Called is true
 
 ### `runLoopOnce()`
 
-Run micro tasks until the micro task queue has been exhausted, then run a macro task (if any).
+Run micro task callbacks until the queue has been exhausted, then run pending callbacks of macro tasks.
+
+- If a new micro task callback enqueued when executing another, it will also be executed.
+- Callbacks enqueued in macro task callback will not be executed.
 
 ### `loopWhile(predicate)`
 

@@ -16,8 +16,8 @@ export function loopWhile(pred: () => boolean) {
 }
 
 /**
- * Run micro tasks until the micro task queue has been exhausted,
- * then run a macro task (if any).
+ * Run micro task callbacks until the queue has been exhausted,
+ * then run all macro tasks callbacks (no nesting).
  */
 export function runLoopOnce() {
 	process._tickCallback();
