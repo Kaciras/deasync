@@ -15,6 +15,10 @@ export function loopWhile(pred: () => boolean) {
 	}
 }
 
+/**
+ * Run micro tasks until the micro task queue has been exhausted,
+ * then run a macro task (if any).
+ */
 export function runLoopOnce() {
 	process._tickCallback();
 	uvRun(); // Macro task should be run after microtasks.

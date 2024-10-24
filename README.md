@@ -15,7 +15,7 @@ The benefit of this package over [synckit](https://github.com/un-ts/synckit), [a
 
 > [!WARNING]
 > 
-> Due to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), `awaitSync` and deasynced functions only work on top level, calling them from async callback will cause a deadlock.
+> Due to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), functions that poll the event loop and deasynced functions only work at the top level, and calling them from asynchronous callbacks can lead to deadlocks.
 
 ## Installation
 
@@ -28,8 +28,6 @@ DeAsync downloads prebuild binary from GitHub releases during installation, if d
 DeAsync uses node-gyp to compile C++ source code, so to build Deasync you may need the compilers listed in [node-gyp](https://github.com/nodejs/node-gyp).
 
 ## Usage
-
-DeAsync exports only two APIs: `deasync` for callback-style functions, and `awaitSync` for Promises.
 
 ### `deasync(function)`
 
@@ -61,6 +59,39 @@ const promise = new Promise(resolve => setTimeout(resolve, 1000)).then(() => "wa
 console.log("Timestamp before: " + performance.now());
 console.log(awaitSync(promise));
 console.log("Timestamp after: " + performance.now());
+```
+
+### `uvRun()`
+
+Run pending callbacks of macro tasks in the event loop.
+
+```javascript
+const { uvRun } = require("@kaciras/deasync");
+
+let called = false;
+setImmediate(() => called = true);
+
+uvRun();
+console.log(`Called is ${called}`); // Called is true
+```
+
+### `runLoopOnce()`
+
+Run micro tasks until the micro task queue has been exhausted, then run a macro task (if any).
+
+### `loopWhile(predicate)`
+
+For async function with unconventional API, for instance function asyncFunction(p1,function cb(res){}), use loopWhile(predicateFunc) where predicateFunc is a function that returns boolean loop condition.
+
+```javascript
+let done = false;
+let data;
+asyncFunction(p1, res => {
+	data = res;
+	done = true;
+});
+require('deasync').loopWhile(() => !done);
+// data is now populated
 ```
 
 ## Recommendation
