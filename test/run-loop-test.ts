@@ -43,11 +43,11 @@ it("should run all macro task callbacks", () => {
 });
 
 it("should not run nested macro task callbacks", () => {
-	let notCalled = true;
+	let called = false;
 	setImmediate(() => {
-		setImmediate(() => notCalled = false);
+		setImmediate(() => called = true);
 	});
 
 	runLoopOnce();
-	assert.ok(notCalled, "Callback add in another was called");
+	assert.ok(!called, "Callback add in another was called");
 });

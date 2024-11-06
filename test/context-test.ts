@@ -8,7 +8,7 @@ const filename = join(__dirname, "worker.js");
 
 it("should run in worker threads", async () => {
 	const worker = new Worker(filename);
-	const value = await new Promise<any>((resolve, reject) => worker.on("message", resolve).on("error", reject));
+	const value = await new Promise<string>((resolve, reject) => worker.on("message", resolve).on("error", reject));
 	assert.strictEqual(value, "ENOENT");
 });
 

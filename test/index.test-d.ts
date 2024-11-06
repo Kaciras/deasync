@@ -6,7 +6,7 @@ declare function expectAssignable<T>(_: T): void;
 
 // Test types for returned function of deasync().
 {
-	function stub(a: string, b: number, c: (err: Error, info: boolean) => void) {}
+	function stub(_: string, __: number, ___: (err: Error, info: boolean) => void) {}
 
 	const wrapped = deasync(stub);
 
