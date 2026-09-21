@@ -43,10 +43,10 @@
 		"@kaciras/eslint-config-core": "^3.4.2",
 		"@kaciras/eslint-config-typescript": "^3.4.2",
 		"@types/mocha": "^10.0.10",
-		"@types/node": "^26.5.1",
+		"@types/node": "^26.6.2",
 		"c8": "^12.0.0",
-		"eslint": "^10.10.0",
-		"mocha": "^12.0.1",
+		"eslint": "^10.11.0",
+		"mocha": "^12.0.2",
 		"ts-directly": "^2.1.2",
 		"typescript": "^7.0.2"
 	}
