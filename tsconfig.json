@@ -1,15 +1,9 @@
 {
 	"files": ["index.ts"],
-	"ts-node": {
-		"transpileOnly": true
-	},
 	"compilerOptions": {
-		"target": "ESNext",
+		"target": "ES2022",
 		"module": "CommonJS",
-		"moduleResolution": "Node",
-		"lib": [
-			"ESNext"
-		],
+		"types": ["node", "mocha"],
 		"sourceMap": true,
 		"declaration": true,
 		"strict": true,
