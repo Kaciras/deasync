@@ -1,9 +1,15 @@
 name: Build and Publish
 
 on:
-  workflow_dispatch:  # 允许手动触发测试
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      publish_to_npm:
+        description: 'Publish to Npm?'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -11,7 +17,6 @@ permissions:
 jobs:
   build-native:
     strategy:
-      fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
@@ -54,7 +59,6 @@ jobs:
 
   publish:
     needs: build-native
-    if: github.event_name == 'release'
     runs-on: ubuntu-latest
 
     permissions:
@@ -89,4 +93,5 @@ jobs:
           npm pack --dry-run
 
       - name: Publish to npm with Provenance
+        if: github.event_name == 'release' || inputs.publish_to_npm == true
         run: npm publish --provenance --access public
