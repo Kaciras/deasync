@@ -1,0 +1,88 @@
+name: Build and Publish
+
+on:
+  workflow_dispatch:  # 允许手动触发测试
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build-native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux
+
+          - os: windows-latest
+            platform: win32
+
+          - os: macos-latest
+            platform: darwin
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          cache: pnpm
+          node-version: latest
+
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - run: pnpm install
+      - run: pnpm add -g node-gyp
+      - run: node-gyp rebuild
+
+      - name: Prepare for upload
+        shell: bash
+        run: |
+          mkdir -p prebuilds
+          cp build/Release/binding.node prebuilds/${{ matrix.platform }}.node
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: binding-${{ matrix.platform }}
+          path: prebuilds/${{ matrix.platform }}.node
+          if-no-files-found: error
+
+  publish:
+    needs: build-native
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          cache: pnpm
+          node-version: latest
+
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - run: pnpm install
+
+      - run: pnpm run compile:ts
+
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: binding-*
+          path: prebuilds
+          merge-multiple: true
+
+      - name: Verify packaged files
+        run: |
+          ls -la prebuilds/*
+          npm pack --dry-run
+
+      - name: Publish to npm with Provenance
+        run: npm publish --provenance --access public

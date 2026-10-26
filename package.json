@@ -16,29 +16,19 @@
 		"promise",
 		"async wrapper"
 	],
-	"engines": {
-		"node": ">=20"
-	},
 	"type": "commonjs",
 	"main": "index.js",
 	"types": "index.d.ts",
 	"files": [
-		"binding.gyp",
-		"src",
-		"script",
+		"prebuilds",
 		"index.js",
 		"index.d.ts"
 	],
 	"scripts": {
-		"install": "node script/prebuild.js install",
 		"lint": "eslint --fix",
 		"compile:ts": "tsc",
 		"test": "mocha && tsc --project tsconfig-test.json",
 		"test:coverage": "c8 --reporter=lcov mocha"
-	},
-	"dependencies": {
-		"follow-redirects": "^1.16.1",
-		"tar-fs": "^3.1.3"
 	},
 	"devDependencies": {
 		"@kaciras/eslint-config-core": "^3.4.2",

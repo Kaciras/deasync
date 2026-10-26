@@ -15,19 +15,13 @@ The benefit of this package over [synckit](https://github.com/un-ts/synckit), [a
 
 > [!WARNING]
 > 
-> Due to [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), functions that poll the event loop and deasynced functions only work at the top level, and calling them from asynchronous callbacks can lead to deadlocks.
+> Due to `MicrotaskQueue::PerformCheckpoint` and [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), functions that poll the event loop and deasynced functions only work in synchronous context, and calling them from asynchronous callbacks can lead to deadlocks.
 
-## Installation
+## Usage
 
 ```shell
 npm install @kaciras/deasync
 ```
-
-DeAsync downloads prebuild binary from GitHub releases during installation, if download fails, try to build locally. You can skip the install phase by setting the environment variable `NO_PREBUILD=1`.
-
-DeAsync uses node-gyp to compile C++ source code, so to build Deasync you may need the compilers listed in [node-gyp](https://github.com/nodejs/node-gyp).
-
-## Usage
 
 ### `deasync(function)`
 

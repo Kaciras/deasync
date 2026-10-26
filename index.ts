@@ -1,5 +1,13 @@
 /// <reference types="./missing-types" />
-import { uvRun } from "./build/Release/binding.node";
+import { platform } from "os";
+
+let uvRun: () => void;
+
+try {
+	({ uvRun } = require(`./prebuilds/${platform()}.node`));
+} catch {
+	({ uvRun } = require("./build/Release/binding.node"));
+}
 
 export { uvRun };
 

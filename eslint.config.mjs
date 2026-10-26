@@ -5,4 +5,5 @@ export default [
 	{ ignores: ["coverage/**", "index.js"] },
 	...core,
 	...typescript.map(config => ({ ...config, files: ["**/*.ts"] })),
+	{ rules: { "@typescript-eslint/no-require-imports": 0 } },
 ];
