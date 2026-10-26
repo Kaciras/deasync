@@ -1,5 +1,4 @@
 module.exports = {
-	spec: ["test/*-test.ts"],
+	spec: ["test/*-test.js"],
 	parallel: true,
-	require: "ts-directly/register",
 };

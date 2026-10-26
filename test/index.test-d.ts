@@ -1,4 +1,4 @@
-import { awaitSync, deasync } from "../index";
+import { awaitSync, deasync } from "../index.js";
 
 declare function type<T>(): T;
 

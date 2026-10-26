@@ -36,9 +36,6 @@ importers:
       mocha:
         specifier: ^12.0.3
         version: 12.0.3
-      ts-directly:
-        specifier: ^2.1.2
-        version: 2.1.2(typescript@7.0.2)
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
@@ -849,38 +846,6 @@ packages:
     engines: {node: '>=18.12'}
     peerDependencies:
       typescript: '>=4.8.4'
-
-  ts-directly@2.1.2:
-    resolution: {integrity: sha512-Onklx+5ZyaG4qUKZURMhhQkd71Gh1/Lb1pFx21Ovd6srutL6cvsLH9JUgQD9R6gtHM7h5e46hPyByUT0MtzlLg==}
-    engines: {node: '>=18.19'}
-    peerDependencies:
-      '@swc/core': '>=1'
-      esbuild: '*'
-      oxc-transform: '*'
-      sucrase: '>=3'
-      typescript: '>=5'
-    peerDependenciesMeta:
-      '@swc/core':
-        optional: true
-      esbuild:
-        optional: true
-      oxc-transform:
-        optional: true
-      sucrase:
-        optional: true
-      typescript:
-        optional: true
-
-  tsconfck@3.1.6:
-    resolution: {integrity: sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w==}
-    engines: {node: ^18 || >=20}
-    deprecated: unmaintained
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -1722,16 +1687,6 @@ snapshots:
 
   ts-api-utils@2.5.0(typescript@7.0.2):
     dependencies:
-      typescript: 7.0.2
-
-  ts-directly@2.1.2(typescript@7.0.2):
-    dependencies:
-      tsconfck: 3.1.6(typescript@7.0.2)
-    optionalDependencies:
-      typescript: 7.0.2
-
-  tsconfck@3.1.6(typescript@7.0.2):
-    optionalDependencies:
       typescript: 7.0.2
 
   type-check@0.4.0:

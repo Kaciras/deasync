@@ -1,6 +1,6 @@
 const { readFile } = require("fs");
 const { isMainThread, parentPort } = require("worker_threads");
-const { deasync } = require("../index");
+const { deasync } = require("../index.js");
 
 const readFileSync = deasync(readFile);
 
