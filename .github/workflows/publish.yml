@@ -25,14 +25,14 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
       - uses: actions/setup-node@v6
         with:
           cache: pnpm
           node-version: latest
-
-      - uses: actions/checkout@v7
-
-      - uses: pnpm/action-setup@v6
 
       - run: pnpm install
       - run: pnpm add -g node-gyp
