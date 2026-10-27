@@ -47,14 +47,12 @@ jobs:
 
       - name: Prepare for upload
         shell: bash
-        run: |
-          mkdir -p prebuilds
-          cp build/Release/binding.node prebuilds/${{ matrix.platform }}.node
+        run: cp build/Release/binding.node ${{ matrix.platform }}.node
 
       - uses: actions/upload-artifact@v7
         with:
           name: binding-${{ matrix.platform }}
-          path: prebuilds/${{ matrix.platform }}.node
+          path: ${{ matrix.platform }}.node
           if-no-files-found: error
 
   publish:
@@ -84,12 +82,11 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           pattern: binding-*
-          path: prebuilds
           merge-multiple: true
 
       - name: Verify packaged files
         run: |
-          ls -la prebuilds/*
+          ls -la *
           npm pack --dry-run
 
       - name: Publish to npm with Provenance
