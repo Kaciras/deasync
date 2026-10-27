@@ -1,21 +1,20 @@
 # DeAsync
 
 [![Npm Version](https://img.shields.io/npm/v/@kaciras/deasync)](https://www.npmjs.com/package/@kaciras/deasync)
-![NPM Type Definitions](https://img.shields.io/npm/types/%40kaciras%2Fdeasync)
-![node-current (scoped)](https://img.shields.io/node/v/@kaciras/deasync)
+[![npm provenance](https://img.shields.io/badge/npm-provenance-brightgreen?logo=npm)](https://www.npmjs.com/package/@kaciras/deasync#provenance)
 [![Test](https://github.com/Kaciras/deasync/actions/workflows/test.yml/badge.svg)](https://github.com/Kaciras/deasync/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/Kaciras/deasync/branch/master/graph/badge.svg?token=ST7ROWQH0Z)](https://codecov.io/gh/Kaciras/deasync)
 ![Static Badge](https://img.shields.io/badge/dependencies-0-46c018)
 
 DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is written in C++.
 
-This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, **adding some new features: types, Promise support, and prebuild binaries.**
+This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, **adding new features: types, Promise support, and prebuild binaries.**
 
-The benefit of this package over [synckit](https://github.com/un-ts/synckit), [await-sync](https://github.com/jimmywarting/await-sync) and others libs is that this runs your code in the current context, so parameters and the return value of your function are no need to be serializable, you are free to use `Symbol`, functions, and objects with prototypes.
+The benefit of this package over [synckit](https://github.com/un-ts/synckit), [await-sync](https://github.com/jimmywarting/await-sync) and others libs is that this runs your code in the current context, so parameters and the return value of your function are no need to be serializable, you are free to pass `Symbol`, functions, and classes.
 
 > [!WARNING]
 > 
-> Due to `MicrotaskQueue::PerformCheckpoint` and [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), functions that poll the event loop and deasynced functions only work in synchronous context, and calling them from asynchronous callbacks can lead to deadlocks.
+> Due to `MicrotaskQueue::PerformCheckpoint` and [`uv_run()` is not reentrant](https://docs.libuv.org/en/v1.x/loop.html#c.uv_run), calling `runLoopOnce` and deasynced functions them from asynchronous callbacks can lead to deadlocks.
 
 ## Usage
 

@@ -2,14 +2,10 @@
 /node_modules
 .idea
 /.project
-/bin
 /.node-gyp
-.nyc*
 /coverage
 
 /index.js
-/temp.js
+/debug.js
 *.d.ts
 *.js.map
-
-!/test/worker.js
