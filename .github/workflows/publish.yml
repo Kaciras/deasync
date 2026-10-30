@@ -23,7 +23,7 @@ jobs:
             platform: linux
             arch: x64
 
-          - os: ubuntu-24.04-arm
+          - os: ubuntu-26.04-arm
             platform: linux
             arch: arm64
 
@@ -51,22 +51,21 @@ jobs:
       - run: pnpm install
       - run: pnpm add -g node-gyp
 
-      - name: Compile and Prepare (MacOS Dual Arch)
-        if: runner.os == 'macOS'
+      - name: Compile (MacOS & Windows)
+        if: runner.os == 'macOS' || runner.os == 'Windows'
+        shell: bash
         run: |
           node-gyp rebuild --arch=arm64
-          mv build/Release/binding.node darwin-arm64.node
+          mv build/Release/binding.node ${{ matrix.platform }}-arm64.node
           
           node-gyp rebuild --arch=x64
-          mv build/Release/binding.node darwin-x64.node
+          mv build/Release/binding.node ${{ matrix.platform }}-x64.node
 
-      - run: node-gyp rebuild
-        if: runner.os != 'macOS'
-
-      - name: Prepare for upload
-        if: runner.os != 'macOS'
-        shell: bash
-        run: mv build/Release/binding.node ${{ matrix.platform }}-${{ matrix.arch }}.node
+      - name: Compile (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          node-gyp rebuild
+          mv build/Release/binding.node ${{ matrix.platform }}-${{ matrix.arch }}.node
 
       - uses: actions/upload-artifact@v7
         with:
@@ -104,9 +103,7 @@ jobs:
           merge-multiple: true
 
       - name: Verify packaged files
-        run: |
-          ls -la *
-          npm pack --dry-run
+        run: npm pack --dry-run
 
       - name: Publish to npm with Provenance
         if: github.event_name == 'release' || inputs.publish_to_npm == true
