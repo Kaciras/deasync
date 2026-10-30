@@ -8,7 +8,11 @@
 
 DeAsync turns async code into sync, implemented with a blocking mechanism by calling Node.js event loop at JavaScript layer. The core of deasync is written in C++.
 
-This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, **adding new features: types, Promise support, and prebuild binaries.**
+This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and rewritten in modern code, **adding new features**: types, Promise support, and prebuild binaries.
+
+- TypeScript types.
+- Promise support `awaitSync`.
+- Prebuild binaries for `win32`, `linux`, `macOS` (x64 and arm64).
 
 The benefit of this package over [synckit](https://github.com/un-ts/synckit), [await-sync](https://github.com/jimmywarting/await-sync) and others libs is that this runs your code in the current context, so parameters and the return value of your function are no need to be serializable, you are free to pass `Symbol`, functions, and classes.
 
