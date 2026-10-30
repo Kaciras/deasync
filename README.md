@@ -12,7 +12,7 @@ This project is forked from [abbr/deasync](https://github.com/abbr/deasync) and 
 
 - TypeScript types.
 - Promise support `awaitSync`.
-- Prebuild binaries for `win32`, `linux`, `macOS` (x64 and arm64).
+- Prebuild binaries for `win32` & `linux` & `macOS`, x64 and arm64.
 
 The benefit of this package over [synckit](https://github.com/un-ts/synckit), [await-sync](https://github.com/jimmywarting/await-sync) and others libs is that this runs your code in the current context, so parameters and the return value of your function are no need to be serializable, you are free to pass `Symbol`, functions, and classes.
 
@@ -24,6 +24,12 @@ The benefit of this package over [synckit](https://github.com/un-ts/synckit), [a
 
 ```shell
 npm install @kaciras/deasync
+```
+
+For OS has no suitable prebuilt binary, you can build it with [node-gyp](https://github.com/nodejs/node-gyp):
+
+```shell
+cd node_modules/@kaciras/deasync && node-gyp rebuild
 ```
 
 ### `deasync(function)`
