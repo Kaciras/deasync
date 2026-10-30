@@ -21,12 +21,19 @@ jobs:
         include:
           - os: ubuntu-latest
             platform: linux
+            arch: x64
+
+          - os: ubuntu-24.04-arm
+            platform: linux
+            arch: arm64
 
           - os: windows-latest
             platform: win32
+            arch: x64
 
           - os: macos-latest
             platform: darwin
+            arch: arm64
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -43,16 +50,28 @@ jobs:
 
       - run: pnpm install
       - run: pnpm add -g node-gyp
+
+      - name: Compile and Prepare (MacOS Dual Arch)
+        if: runner.os == 'macOS'
+        run: |
+          node-gyp rebuild --arch=arm64
+          mv build/Release/binding.node darwin-arm64.node
+          
+          node-gyp rebuild --arch=x64
+          mv build/Release/binding.node darwin-x64.node
+
       - run: node-gyp rebuild
+        if: runner.os != 'macOS'
 
       - name: Prepare for upload
+        if: runner.os != 'macOS'
         shell: bash
-        run: cp build/Release/binding.node ${{ matrix.platform }}.node
+        run: mv build/Release/binding.node ${{ matrix.platform }}-${{ matrix.arch }}.node
 
       - uses: actions/upload-artifact@v7
         with:
-          name: binding-${{ matrix.platform }}
-          path: ${{ matrix.platform }}.node
+          name: binding-${{ matrix.platform }}-${{ matrix.arch }}
+          path: '*.node'
           if-no-files-found: error
 
   publish:
