@@ -4,7 +4,7 @@ import { platform } from "os";
 let uvRun: () => void;
 
 try {
-	({ uvRun } = require(`./prebuilds/${platform()}.node`));
+	({ uvRun } = require(`./${platform()}.node`));
 } catch {
 	({ uvRun } = require("./build/Release/binding.node"));
 }
