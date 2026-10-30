@@ -1,7 +1,7 @@
 {
 	"targets": [{
 		"target_name": "binding",
-		"sources": ["deasync.cc"]
+		"sources": ["deasync.cc"],
 		"xcode_settings": {
         	"MACOSX_DEPLOYMENT_TARGET": "10.7"
         },
