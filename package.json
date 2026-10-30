@@ -19,10 +19,11 @@
 	"type": "commonjs",
 	"main": "index.js",
 	"types": "index.d.ts",
+	"gypfile": false,
 	"files": [
-		"prebuilds",
 		"index.js",
-		"index.d.ts"
+		"index.d.ts",
+		"*.node"
 	],
 	"scripts": {
 		"lint": "eslint --fix",
